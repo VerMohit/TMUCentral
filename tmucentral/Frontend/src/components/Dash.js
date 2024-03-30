@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom"
 export default function Dash() {
   const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
-  const navigate = useNavigate() // Use useNavigate here
+  const navigate = useNavigate() 
 
   async function handleLogout() {
     setError("")
@@ -39,3 +39,4 @@ export default function Dash() {
     </>
   )
 }
+

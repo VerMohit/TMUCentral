@@ -10,9 +10,9 @@ import PostAd from './PostAd';
 import Login from './Login';
 import AdminDashboard from './AdminDashboard';
 import PrivateRoute from './PrivateRoute';
-//import { AuthProvider } from "../contexts/AuthContext" //not working
-//import Dash from './Dash'; //not working
-
+import { AuthProvider } from "../contexts/AuthContext" //not working
+import Dashboard from './Dashboard'; //not working
+import Footer from './Footer';
 
   // Manage server API POST for new form submissions
   async function handleFormSubmit(path, data, msg) { 
@@ -50,7 +50,7 @@ function App() {
   return (
 
 <BrowserRouter>
-{/* <AuthProvider>  //not working*/}
+<AuthProvider>  
   <Routes>
   <Route path='/postad' element={
       <PostAd onFormSubmit={handleFormSubmit}/>
@@ -61,9 +61,6 @@ function App() {
    <div> 
     <NavBar></NavBar> <br></br>
     <div>
-    <AdDisplayCard></AdDisplayCard>
-    <AdDisplayCard></AdDisplayCard>
-    <AdDisplayCard></AdDisplayCard>
     <AdDisplayCard></AdDisplayCard>
     </div>
     </div>
@@ -76,19 +73,12 @@ function App() {
     } />
     <Route path="/admin" element={<AdminDashboard/>} />
     
-    {/* <Route element={<PrivateRoute />}>  */}
-            {/* <Route path="/dashboard" element={<Dash />} />*/}
-          {/* </Route> */}
-
-
-    {/* <Route path="/admin" element={<PrivateRoute component={AdminDashboard} />} /> */}
+    <Route element={<PrivateRoute />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+     </Route>
   </Routes>
-  {/* </AuthProvider>  //not working */}
+  </AuthProvider>  
 </BrowserRouter>
-
-
-
-
   );
 }
 

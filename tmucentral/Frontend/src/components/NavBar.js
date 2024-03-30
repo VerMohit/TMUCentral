@@ -5,7 +5,10 @@ import { Link } from 'react-router-dom';
 const NavBar = ({onFormSubmit}) => {
   const titleRef = useRef();
   const [priceDropdown, setPriceDropdown] = useState(false);
-
+  const categoryRef = useRef();
+  const fromPriceRef = useRef();
+  const toPriceRef = useRef();
+  const [category, setCategory] = useState('');
   const togglePriceDropdown = () => setPriceDropdown(!priceDropdown);
 
   async function handleSubmit(e) {
@@ -18,6 +21,15 @@ const NavBar = ({onFormSubmit}) => {
       alert("No Results");
     }
   }
+
+  const navbarStyle = {
+    backgroundColor: '#004c9b',
+  };
+
+  const handleCategorySelect = (cat) => {
+    setCategory(cat);
+  };
+
 
   return (
     <Navbar style={navbarStyle} variant="dark" expand="lg" className="shadow-sm">
@@ -32,34 +44,35 @@ const NavBar = ({onFormSubmit}) => {
               ref={titleRef}
               className="me-2"
               aria-label="Search"
-              style={{ maxWidth: '60%' }} // Adjust the max-width to control the size of the search bar
+              style={{ maxWidth: '60%' }} 
             />
 
             <Button variant="success" className="ms-2" style={{ marginRight: '10px' }}>Search</Button>
 
             <Dropdown>
-              <Dropdown.Toggle variant="outline-light" id="dropdown-basic">
-                Category
+              <Dropdown.Toggle variant="outline-light" id="dropdown-basic" title={category ? category.replace(/([A-Z])/g, ' $1').trim() : "Select a category"} ref={categoryRef}>
+              {category ? category.replace(/([A-Z])/g, ' $1').trim() : "Category"}
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item href="#/academic-services">Academic Services</Dropdown.Item>
-                <Dropdown.Item href="#/items-for-sale">Items for Sale</Dropdown.Item>
-                <Dropdown.Item href="#/items-wanted">Items Wanted</Dropdown.Item>
+                <Dropdown.Item onClick={() => handleCategorySelect('Academic Services')}>Academic Services</Dropdown.Item>
+                <Dropdown.Item onClick={() => handleCategorySelect('Items for Sale')}>Items for Sale</Dropdown.Item>
+                <Dropdown.Item onClick={() => handleCategorySelect('Items Wanted')}>Items Wanted</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
+            
             <Button variant="outline-light" className="ms-2" onClick={togglePriceDropdown} style={{ marginRight: '20px' }}>
               Price
             </Button>
           </Form>
           {priceDropdown && (
-            <div className="position-absolute bg-white p-3" style={{ zIndex: 1000 }}>
+            <div className="position-relative bg-white p-3" style={{ zIndex: 1000 }}>
               <h6>Price</h6>
               <InputGroup>
-                <FormControl placeholder="from" />
-                <FormControl placeholder="to" />
+                <FormControl placeholder="from" ref={fromPriceRef}/>
+                <FormControl placeholder="to" ref={toPriceRef}/>
               </InputGroup>
-              <Button variant="outline-secondary" className="w-100 mt-2">
+              <Button variant="outline-secondary" className="w-100 mt-2" onClick={togglePriceDropdown}>
                 Apply
               </Button>
             </div>

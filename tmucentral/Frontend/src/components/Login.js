@@ -1,26 +1,28 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
-import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from "../contexts/AuthContext";
+import { Link, useNavigate } from "react-router-dom"; 
 
-export default function Login({onFormSubmit}) {
+export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const { login } = useAuth();
   const [error, setError] = useState("");
-  const navigate = useNavigate(); // Updated here
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); 
 
   async function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
+
     try {
-      const data = {
-        email: emailRef.current.value,
-        password: passwordRef.current.value
-      };
-      const msg = "You have sucessfully logged in!";
-      await onFormSubmit('/searchUser', data, msg);
-      navigate("/");
+      setError("");
+      setLoading(true);
+      await login(emailRef.current.value, passwordRef.current.value);
+      navigate("/"); 
     } catch {
       setError("Failed to log in");
     }
+    setLoading(false);
   }
 
   return (
@@ -30,7 +32,7 @@ export default function Login({onFormSubmit}) {
           <h2 className="text-center mb-4">Log In</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
-            <Form.Group id="email" className="mb-3"> 
+            <Form.Group id="email" className="mb-3">
               <Form.Label style={{ fontWeight: 'bold' }}>Email</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
             </Form.Group>

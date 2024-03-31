@@ -17,7 +17,7 @@ const Ad = model('Ad', new Schema({
     location: {type: String, required: true},
     sold: {type: Boolean, required: true},
     image: {type: String, required: false},
-    email: {type: String, required: false},
+    email: {type: String, required: true}, // set to true
     category: {type: [
         "itemWanted", 
         "itemForSale", 

@@ -5,13 +5,13 @@ import { Link, useNavigate } from "react-router-dom" // Updated here
 
 export default function Register() {
   const emailRef = useRef()
+  const nameRef = useRef();
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
-  const nameRef = useRef();
   const { signup } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
-  const navigate = useNavigate() 
+  const navigate = useNavigate() // Updated here
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -24,13 +24,14 @@ export default function Register() {
       setError("")
       setLoading(true)
       await signup(emailRef.current.value, passwordRef.current.value)
-      navigate("/") 
+      navigate("/") // Updated here
     } catch {
       setError("Failed to create an account")
     }
 
     setLoading(false)
   }
+
 
   return (
     <>
@@ -39,9 +40,9 @@ export default function Register() {
           <h2 className="text-center mb-4">Sign Up</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
-          <Form.Group id="name" className="mb-3"> 
-            <Form.Label style={{ fontWeight: 'bold' }}>Full Name</Form.Label>
-            <Form.Control type="text" ref={nameRef} required />
+            <Form.Group id="name" className="mb-3"> 
+             <Form.Label style={{ fontWeight: 'bold' }}>Full Name</Form.Label>
+             <Form.Control type="text" ref={nameRef} required />
             </Form.Group>
             <Form.Group id="email" className="mb-3">
               <Form.Label style={{ fontWeight: 'bold' }}>Email</Form.Label>

@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-
 function ImageUpload() {
 
     const[image,setImage]=useState("")

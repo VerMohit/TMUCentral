@@ -6,7 +6,7 @@ function ImageUpload() {
     var reader = new FileReader(); 
     reader.readAsDataURL(e.target.files[0]); 
     reader.onload = () => {
-      console.log(reader.result); // base64 encoded string
+      console.log(reader.result); 
       setImage(reader.result);
     };
     reader.onerror = error => {

@@ -1,17 +1,17 @@
 .ad-card {
     margin: 1rem;
     border: none;
-    border-radius: 0.5rem; /* Rounded corners */
-    transition: transform 0.3s ease; /* Smooth transform on hover */
+    border-radius: 0.5rem; 
+    transition: transform 0.3s ease; 
   }
   
   .ad-card:hover {
-    transform: translateY(-5px); /* Slight raise effect on hover */
+    transform: translateY(-5px); 
   }
   
   .ad-card-image {
     max-width: 100%;
-    height: auto; /* Maintain aspect ratio */
+    height: auto; 
     object-fit: cover;
   }
   
@@ -21,18 +21,18 @@
   }
   
   .ad-card-price {
-    color: #4a4a4a; /* Subdued text color for price */
+    color: #4a4a4a; 
     font-weight: 500;
   }
   
   .ad-card-description {
     font-size: 0.9rem;
-    color: #6c757d; /* Muted description text */
+    color: #6c757d; 
   }
   
   .ad-card-date,
   .ad-card-location {
     font-size: 0.8rem;
-    color: #6c757d; /* Consistent color for meta info */
+    color: #6c757d; 
   }
   

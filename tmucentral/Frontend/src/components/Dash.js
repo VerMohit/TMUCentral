@@ -13,7 +13,7 @@ export default function Dash() {
 
     try {
       await logout()
-      navigate("/login") // Use navigate method instead of history.push
+      navigate("/login") 
     } catch {
       setError("Failed to log out")
     }

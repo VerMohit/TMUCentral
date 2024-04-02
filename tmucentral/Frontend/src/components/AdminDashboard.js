@@ -3,7 +3,7 @@ import { Container, Row, Col, ListGroup, Card } from 'react-bootstrap';
 import AdCard from './AdCard';
 export default function AdminDashboard() {
   const [users, setUsers] = useState([]);
-  const [activeMenu, setActiveMenu] = useState(''); // Track the active admin menu
+  const [activeMenu, setActiveMenu] = useState(''); 
   const [ads, setAds] = useState([]);
 
   useEffect(() => {
@@ -20,13 +20,11 @@ export default function AdminDashboard() {
           .catch(err => console.error(err));
   }, []); 
 
-
-
   useEffect(() => {
     const PORT = process.env.PORT || 3005;
     const url = `http://localhost:${PORT}/api/database/getUsers`;
 
-    if (activeMenu === 'manage-users') { // Fetch users only if "Manage Users" is active
+    if (activeMenu === 'manage-users') { 
       fetch(url)
         .then((resp) => {
           if (!resp.ok) {
@@ -37,7 +35,7 @@ export default function AdminDashboard() {
         .then(data => setUsers(data.Review))
         .catch(err => console.error(err));
     }
-  }, [activeMenu]); // Dependency array includes activeMenu to refetch when it changes
+  }, [activeMenu]);
 
   const handleMenuSelect = (menuKey) => {
     setActiveMenu(menuKey);
@@ -59,7 +57,6 @@ export default function AdminDashboard() {
             <Card>
               <Card.Body>
                 <Card.Title>Manage Ads</Card.Title>
-                {/* Render the list of users here */}
                 <ListGroup>
                   {ads.map((ad,index) => (
                     <AdCard
@@ -81,10 +78,8 @@ export default function AdminDashboard() {
             <Card>
               <Card.Body>
                 <Card.Title>Manage Users</Card.Title>
-                {/* Render the list of users here */}
                 <ListGroup>
                   {users.map((user, index) => (
-                    // Displaying user name and email
                     <ListGroup.Item key={index}>
                       <strong>Name:</strong> {user.name} <br />
                       <strong>Email:</strong> {user.email}
@@ -95,7 +90,6 @@ export default function AdminDashboard() {
               </Card.Body>
             </Card>
           )}
-          {/* Similarly, other conditions and renders for different menu items */}
         </Col>
       </Row>
     </Container>

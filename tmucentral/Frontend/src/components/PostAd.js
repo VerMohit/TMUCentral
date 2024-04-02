@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Card, Form, Button, InputGroup, FormControl, DropdownButton, Dropdown, Col, Row, Alert } from 'react-bootstrap';
 
 import { useAuth } from "../contexts/AuthContext"
-
+import { Link, useNavigate } from "react-router-dom"
 
 const PostAd = ({ onFormSubmit }) => {
   const { currentUser, logout } = useAuth();
@@ -16,16 +16,13 @@ const PostAd = ({ onFormSubmit }) => {
   const [error, setError] = useState("");
   const [image, setImage] = useState(null);
   const email = currentUser.email;
-
+  const navigate = useNavigate() 
   const handleFileChange = event => {
-    const file = event.target.files[0]; // Get the file
+    const file = event.target.files[0];
     if (file) {
         const reader = new FileReader();
         reader.onloadend = () => {
-            // reader.result contains the Base64 encoded string
             console.log(reader.result);
-            // You can now set this string to a state variable, 
-            // send it to a server, or use it directly in an <img> tag's src attribute
         };
         reader.readAsDataURL(file);
     }
@@ -45,7 +42,6 @@ const PostAd = ({ onFormSubmit }) => {
         reader.onloadend = () => {
           imageBase64 = reader.result;
 
-          // Resize image if initial size is more than 73KB
           if (imageBase64.length > 73 * 1024) {
             resizeImage(imageBase64, function(resizedImage) {
               submitAd(resizedImage);
@@ -77,9 +73,9 @@ const PostAd = ({ onFormSubmit }) => {
     };
     const msg = "Advertisement submitted successfully!";
     onFormSubmit('/postAds', newAd, msg);
+    navigate("/myads") 
   }
 
-  // Function to resize the image until its size is less than 73KB
   function resizeImage(imageData, callback) {
     const img = new Image();
     img.src = imageData;
@@ -88,14 +84,12 @@ const PostAd = ({ onFormSubmit }) => {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
 
-      // Calculate the new dimensions to maintain aspect ratio
       let width = img.width;
       let height = img.height;
       const aspectRatio = width / height;
-      const targetSize = 73 * 1024; // 73KB in bytes
+      const targetSize = 73 * 1024; 
       let quality = 0.9;
 
-      // Resize until the size is less than the target size
       while (width * height > targetSize) {
         width *= 0.9;
         height = width / aspectRatio;
@@ -106,7 +100,6 @@ const PostAd = ({ onFormSubmit }) => {
         imageData = canvas.toDataURL('image/jpeg', quality);
       }
 
-      // Invoke callback with the resized image data
       callback(imageData);
     };
   }
@@ -118,8 +111,6 @@ const PostAd = ({ onFormSubmit }) => {
         <h2 className="text-center mb-4">Post New Advertisement</h2>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleAdSubmit}>
-          {/* Other form groups remain unchanged */}
-
                <Form.Group as={Row} controlId="formGridTitle" className="mb-3">
             <Form.Label column sm="2" className="fw-bold">Title</Form.Label>
             <Col sm="10">
@@ -172,13 +163,6 @@ const PostAd = ({ onFormSubmit }) => {
             {image && <img src={URL.createObjectURL(image)} alt="Uploaded" style={{ maxWidth: '100px', marginTop: '10px' }} />}
           </Form.Group>
 
-
-        
-
-
-
-
-         
           <Row className="mb-3">
             <Col sm="6">
               <DropdownButton 
@@ -192,7 +176,6 @@ const PostAd = ({ onFormSubmit }) => {
                 <Dropdown.Item onClick={() => handleCategorySelect('Items Wanted')}>Items Wanted</Dropdown.Item>
               </DropdownButton>
             </Col>
-            {/* Submit button remains unchanged */}
             <Col sm="6">
               <Button variant="primary" type="submit" className="w-100">
                  Submit Ad

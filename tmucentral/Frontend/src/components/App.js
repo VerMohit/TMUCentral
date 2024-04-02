@@ -10,12 +10,12 @@ import PostAd from './PostAd';
 import Login from './Login';
 import AdminDashboard from './AdminDashboard';
 import PrivateRoute from './PrivateRoute';
-import { AuthProvider } from "../contexts/AuthContext" //not working
-import Dashboard from './Dashboard'; //not working
+import { AuthProvider } from "../contexts/AuthContext" 
+import Dashboard from './Dashboard'; 
+
+import MyAdDisplayCard from './MyAdDisplayCard';
 import Footer from './Footer';
 
-
-  // Manage server API POST for new form submissions
   async function handleFormSubmit(path, data, msg) { 
     const PORT = process.env.PORT || 3005;
     const url = `http://localhost:${PORT}/api/database/${path}`;
@@ -28,7 +28,6 @@ import Footer from './Footer';
         
         const responseData = await response.json();
   
-        // Check if any errors occurred
         if (!response.ok) {
             if (responseData) {
                 alert(responseData.error);
@@ -36,7 +35,6 @@ import Footer from './Footer';
             throw new Error("Network reponse was not okay");
         }
   
-        // Update user that form was submitted sucessfully to the server
         console.log("Data Submitted: ", responseData);
         if (msg) {
           alert(msg);
@@ -75,7 +73,7 @@ function App() {
       <Login onFormSubmit={handleFormSubmit}/>
     } />
     <Route path="/admin" element={<AdminDashboard/>} />
-    
+    <Route path="/myads" element={<MyAdDisplayCard/>} />
     <Route element={<PrivateRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
      </Route>

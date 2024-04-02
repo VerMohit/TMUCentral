@@ -13,7 +13,7 @@ const NavBar = ({onFormSubmit}) => {
   const togglePriceDropdown = () => setPriceDropdown(!priceDropdown);
   const { currentUser, logout } = useAuth();
   const [error, setError] = useState("")
-  const navigate = useNavigate() // Use useNavigate here
+  const navigate = useNavigate() 
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -39,7 +39,7 @@ const NavBar = ({onFormSubmit}) => {
   
     try {
       await logout()
-      navigate("/login") // Use navigate method instead of history.push
+      navigate("/login") 
     } catch {
       setError("Failed to log out")
     }
@@ -93,7 +93,6 @@ const NavBar = ({onFormSubmit}) => {
           )}
           <Nav className="ms-auto">
             <Nav.Link href="/register" style={{ color: '#fff', marginRight: '5px' }}>{currentUser.email}</Nav.Link>
-            {/* <Nav.Link href="/login" style={{ color: '#fff', marginRight: '20px' }}>Log out</Nav.Link> */}
             <Button variant="danger" onClick={handleLogout}> Log Out</Button>
             <Link to="/postad" className="ms-2">
               <Button variant="warning" style={{ color: 'white' }}>Post ad</Button>

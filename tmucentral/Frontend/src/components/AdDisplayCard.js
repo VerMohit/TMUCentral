@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import AdCard from './AdCard';
 import './AdDisplayCard.css'; 
 
-const AdDisplayCard = () => {
+const AdDisplayCard = ({ onFormSubmit }) => {
     const [ads, setAds] = useState([]);
 
     useEffect(() => {

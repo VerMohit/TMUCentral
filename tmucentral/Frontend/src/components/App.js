@@ -14,6 +14,7 @@ import { AuthProvider } from "../contexts/AuthContext" //not working
 import Dashboard from './Dashboard'; //not working
 import Footer from './Footer';
 
+
   // Manage server API POST for new form submissions
   async function handleFormSubmit(path, data, msg) { 
     const PORT = process.env.PORT || 3005;
@@ -53,18 +54,20 @@ function App() {
 <AuthProvider>  
   <Routes>
   <Route path='/postad' element={
-      <PostAd onFormSubmit={handleFormSubmit}/>
+      <PostAd onFormSubmit={handleFormSubmit}/> 
+  } />  
   
-  
-  } />
-  <Route path="/" element={
-   <div> 
-    <NavBar></NavBar> <br></br>
-    <div>
-    <AdDisplayCard></AdDisplayCard>
-    </div>
-    </div>
-  } />
+  <Route element={<PrivateRoute />}>
+            <Route path="/" element={
+             <div> 
+             <NavBar></NavBar> <br></br>
+             <div>
+             <AdDisplayCard></AdDisplayCard>
+             </div>
+             </div>      
+          } />
+     </Route>
+
     <Route path="/register" element={
       <Register onFormSubmit={handleFormSubmit}/>
     } />

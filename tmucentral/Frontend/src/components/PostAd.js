@@ -16,6 +16,20 @@ const PostAd = ({ onFormSubmit }) => {
   const [error, setError] = useState("");
   const email = currentUser.email;
 
+  const handleFileChange = event => {
+    const file = event.target.files[0]; // Get the file
+    if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            // reader.result contains the Base64 encoded string
+            console.log(reader.result);
+            // You can now set this string to a state variable, 
+            // send it to a server, or use it directly in an <img> tag's src attribute
+        };
+        reader.readAsDataURL(file);
+    }
+};
+
   const handleCategorySelect = (cat) => {
     // This function updates the category state and prevents form submission
     setCategory(cat);
@@ -104,6 +118,7 @@ const PostAd = ({ onFormSubmit }) => {
             <Form.Control 
               type="file" 
               ref={imageRef} 
+              onChange={handleFileChange}
             />
           </Form.Group>
 

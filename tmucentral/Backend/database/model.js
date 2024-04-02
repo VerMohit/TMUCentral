@@ -3,8 +3,8 @@ const {Schema, model} = require('mongoose');
 const ObjectId = Schema.Types.ObjectId;
 
 const User = model('User', new Schema({
-    email: {type: String, required: true},
-    password: {type: String, required: true}
+    name: {type: String, required: true},
+    email: {type: String, required: true}
 }));
 
 const Ad = model('Ad', new Schema({

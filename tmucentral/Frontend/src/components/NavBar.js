@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Container, Navbar, Nav, Form, FormControl, Button, Dropdown, InputGroup } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from "../contexts/AuthContext";
 
 const NavBar = ({onFormSubmit}) => {
   const titleRef = useRef();
@@ -10,6 +11,9 @@ const NavBar = ({onFormSubmit}) => {
   const toPriceRef = useRef();
   const [category, setCategory] = useState('');
   const togglePriceDropdown = () => setPriceDropdown(!priceDropdown);
+  const { currentUser, logout } = useAuth();
+  const [error, setError] = useState("")
+  const navigate = useNavigate() // Use useNavigate here
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -30,6 +34,16 @@ const NavBar = ({onFormSubmit}) => {
     setCategory(cat);
   };
 
+  async function handleLogout() {
+    setError("")
+  
+    try {
+      await logout()
+      navigate("/login") // Use navigate method instead of history.push
+    } catch {
+      setError("Failed to log out")
+    }
+  }
 
   return (
     <Navbar style={navbarStyle} variant="dark" expand="lg" className="shadow-sm">
@@ -78,8 +92,9 @@ const NavBar = ({onFormSubmit}) => {
             </div>
           )}
           <Nav className="ms-auto">
-            <Nav.Link href="/register" style={{ color: '#fff', marginRight: '5px' }}>Register</Nav.Link>
-            <Nav.Link href="/login" style={{ color: '#fff', marginRight: '20px' }}>Sign In</Nav.Link>
+            <Nav.Link href="/register" style={{ color: '#fff', marginRight: '5px' }}>{currentUser.email}</Nav.Link>
+            {/* <Nav.Link href="/login" style={{ color: '#fff', marginRight: '20px' }}>Log out</Nav.Link> */}
+            <Button variant="danger" onClick={handleLogout}> Log Out</Button>
             <Link to="/postad" className="ms-2">
               <Button variant="warning" style={{ color: 'white' }}>Post ad</Button>
             </Link>

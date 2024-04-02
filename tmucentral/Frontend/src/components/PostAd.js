@@ -5,7 +5,7 @@ import { useAuth } from "../contexts/AuthContext"
 
 
 const PostAd = ({ onFormSubmit }) => {
-  const { currentUser, logout } = useAuth()
+  const { currentUser, logout } = useAuth();
   const titleRef = useRef();
   const descriptionRef = useRef();
   const priceRef = useRef();
@@ -14,6 +14,7 @@ const PostAd = ({ onFormSubmit }) => {
   const categoryRef = useRef();
   const [category, setCategory] = useState('');
   const [error, setError] = useState("");
+  const [image, setImage] = useState(null);
   const email = currentUser.email;
 
   const handleFileChange = event => {
@@ -31,33 +32,85 @@ const PostAd = ({ onFormSubmit }) => {
 };
 
   const handleCategorySelect = (cat) => {
-    // This function updates the category state and prevents form submission
     setCategory(cat);
   };
 
-  // Manage form submission
   async function handleAdSubmit(e) {
     e.preventDefault();
     try {
-      const newAd = {
-        //user: ObjectId, 
-        postDate: Date.now(),
-        title: titleRef.current.value,
-        description: descriptionRef.current.value,
-        price: priceRef.current.value,
-        location: locationRef.current.value,
-        sold: false,
-        image: imageRef.current.value,
-        category: category, // Use the state for category
-        email: email,
-      };
-      // Send the post to the server API
-      const msg = "Advertisement submitted successfully!";
-      await onFormSubmit('/postAds', newAd, msg);
+      let imageBase64 = null;
+
+      if (image) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          imageBase64 = reader.result;
+
+          // Resize image if initial size is more than 73KB
+          if (imageBase64.length > 73 * 1024) {
+            resizeImage(imageBase64, function(resizedImage) {
+              submitAd(resizedImage);
+            });
+          } else {
+            submitAd(imageBase64);
+          }
+        };
+        reader.readAsDataURL(image);
+      } else {
+        submitAd("");
+      }
     } catch {
       setError("Failed to post advertisement");
     }
   }
+
+  async function submitAd(imageBase64) {
+    const newAd = {
+      postDate: Date.now(),
+      title: titleRef.current.value,
+      description: descriptionRef.current.value,
+      price: priceRef.current.value,
+      location: locationRef.current.value,
+      sold: false,
+      image: imageBase64,
+      category: category,
+      email: email,
+    };
+    const msg = "Advertisement submitted successfully!";
+    onFormSubmit('/postAds', newAd, msg);
+  }
+
+  // Function to resize the image until its size is less than 73KB
+  function resizeImage(imageData, callback) {
+    const img = new Image();
+    img.src = imageData;
+
+    img.onload = function () {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+
+      // Calculate the new dimensions to maintain aspect ratio
+      let width = img.width;
+      let height = img.height;
+      const aspectRatio = width / height;
+      const targetSize = 73 * 1024; // 73KB in bytes
+      let quality = 0.9;
+
+      // Resize until the size is less than the target size
+      while (width * height > targetSize) {
+        width *= 0.9;
+        height = width / aspectRatio;
+        canvas.width = width;
+        canvas.height = height;
+        ctx.clearRect(0, 0, width, height);
+        ctx.drawImage(img, 0, 0, width, height);
+        imageData = canvas.toDataURL('image/jpeg', quality);
+      }
+
+      // Invoke callback with the resized image data
+      callback(imageData);
+    };
+  }
+
 
   return (
     <Card className="my-4 mx-auto" style={{ maxWidth: '800px' }}>
@@ -115,11 +168,16 @@ const PostAd = ({ onFormSubmit }) => {
 
           <Form.Group controlId="formGridImages" className="mb-3">
             <Form.Label className="fw-bold">Upload Images</Form.Label>
+<<<<<<< Updated upstream
             <Form.Control 
               type="file" 
               ref={imageRef} 
               onChange={handleFileChange}
             />
+=======
+            <Form.Control type="file" ref={imageRef} onChange={(e) => setImage(e.target.files[0])} />
+            {image && <img src={URL.createObjectURL(image)} alt="Uploaded" style={{ maxWidth: '100px', marginTop: '10px' }} />}
+>>>>>>> Stashed changes
           </Form.Group>
 
 

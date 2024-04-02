@@ -43,10 +43,26 @@ exports.patchAds = async(req, res) => {
 };
 
 // Find ad by title
+// exports.searchAd = async(req, res) => {
+//     try{
+//         console.log(req.body.title);
+//         const result = await model.Ad.find({title: req.body.title});
+//         if(result == 0){
+//             res.status(404).send({'error': 'No results returned'});
+//         }
+//         else {
+//             res.status(200).send({'Ad': result});
+//         }
+//     }
+//     catch(err){
+//         res.status(500).send({'error': err.message});
+//     }
+// };
+
 exports.searchAd = async(req, res) => {
     try{
-        console.log(req.body.title);
-        const result = await model.Ad.find({title: req.body.title});
+        console.log(req.body.email);
+        const result = await model.Ad.find({email: req.body.email});
         if(result == 0){
             res.status(404).send({'error': 'No results returned'});
         }

@@ -15,7 +15,7 @@ const Ad = model('Ad', new Schema({
     price: {type: Number, required: false},
     //quantity: {type: Number, required: true},
     location: {type: String, required: true},
-    sold: {type: Boolean, required: true},
+    sold: {type: Boolean, required: false},
     image: {type: String, required: false},
     email: {type: String, required: true}, // set to true
     category: {type: [

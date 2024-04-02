@@ -17,16 +17,6 @@ const PostAd = ({ onFormSubmit }) => {
   const [image, setImage] = useState(null);
   const email = currentUser.email;
   const navigate = useNavigate() 
-  const handleFileChange = event => {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            console.log(reader.result);
-        };
-        reader.readAsDataURL(file);
-    }
-};
 
   const handleCategorySelect = (cat) => {
     setCategory(cat);
@@ -42,7 +32,8 @@ const PostAd = ({ onFormSubmit }) => {
         reader.onloadend = () => {
           imageBase64 = reader.result;
 
-          if (imageBase64.length > 73 * 1024) {
+          // Resize image if initial size is more than (130/2 + 6) = 71KB
+          if (calculateBase64Size(imageBase64) > 130) {
             resizeImage(imageBase64, function(resizedImage) {
               submitAd(resizedImage);
             });
@@ -76,6 +67,7 @@ const PostAd = ({ onFormSubmit }) => {
     navigate("/myads") 
   }
 
+  // Function to resize the image until its size is less than (130/2 + 5) = 71KB
   function resizeImage(imageData, callback) {
     const img = new Image();
     img.src = imageData;
@@ -87,10 +79,12 @@ const PostAd = ({ onFormSubmit }) => {
       let width = img.width;
       let height = img.height;
       const aspectRatio = width / height;
-      const targetSize = 73 * 1024; 
+      const targetSize = 130; // (130/2 + 6) = 71KB in bytes
       let quality = 0.9;
+      let calc = calculateBase64Size(imageData);
 
-      while (width * height > targetSize) {
+      // Resize until the size is less than the target size
+      while (calc > targetSize) {
         width *= 0.9;
         height = width / aspectRatio;
         canvas.width = width;
@@ -98,12 +92,20 @@ const PostAd = ({ onFormSubmit }) => {
         ctx.clearRect(0, 0, width, height);
         ctx.drawImage(img, 0, 0, width, height);
         imageData = canvas.toDataURL('image/jpeg', quality);
+        calc = calculateBase64Size(imageData);
       }
-
+      // Invoke callback with the resized image data
       callback(imageData);
     };
   }
 
+  function calculateBase64Size(base64String) {
+    // Remove data URL prefix
+    const base64WithoutPrefix = base64String.replace(/^data:image\/[a-z]+;base64,/, '');
+    const sizeInBytes = Math.ceil((base64WithoutPrefix.length * 4) / 3);
+    const sizeInKB = sizeInBytes / 1024;
+    return sizeInKB; // Return size in KB
+  }
 
   return (
     <Card className="my-4 mx-auto" style={{ maxWidth: '800px' }}>

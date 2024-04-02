@@ -168,16 +168,8 @@ const PostAd = ({ onFormSubmit }) => {
 
           <Form.Group controlId="formGridImages" className="mb-3">
             <Form.Label className="fw-bold">Upload Images</Form.Label>
-<<<<<<< Updated upstream
-            <Form.Control 
-              type="file" 
-              ref={imageRef} 
-              onChange={handleFileChange}
-            />
-=======
             <Form.Control type="file" ref={imageRef} onChange={(e) => setImage(e.target.files[0])} />
             {image && <img src={URL.createObjectURL(image)} alt="Uploaded" style={{ maxWidth: '100px', marginTop: '10px' }} />}
->>>>>>> Stashed changes
           </Form.Group>
 
 

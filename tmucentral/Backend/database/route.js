@@ -16,6 +16,7 @@ router
     .post('/postAds', _ad.postAds)
     .patch('/ads/ads/:id', _ad.patchAds)
     .post('/searchAd', _ad.searchAd)
+    .post('/searchAds', _ad.searchAds) 
     .get('/ads/tags/:tags', _ad.getAdTags)
 
     .get('/getReview', _review.getReview)

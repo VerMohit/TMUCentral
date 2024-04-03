@@ -6,14 +6,16 @@ import { useAuth } from "../contexts/AuthContext";
 const NavBar = ({onFormSubmit}) => {
   const titleRef = useRef();
   const [priceDropdown, setPriceDropdown] = useState(false);
+  const [LocationDropdowns, setLocationDropdowns] = useState(false);
   const categoryRef = useRef();
   const [category, setCategory] = useState('');
   const togglePriceDropdown = () => setPriceDropdown(!priceDropdown);
+  const toggleLocationDropdowns = () => setLocationDropdowns(!LocationDropdowns);
   const { currentUser, logout } = useAuth();
   const [error, setError] = useState("")
   const navigate = useNavigate() 
   const [title, setTitle] = useState('');
-
+  const [location, setLocation] = useState('');
   const [fromPrice, setFromPrice] = useState('');
 const [toPrice, setToPrice] = useState('');
 
@@ -23,10 +25,11 @@ const [toPrice, setToPrice] = useState('');
     console.log("Test button");
 
     const categoryF = category ? category : "null";
+    const locationF = location ? location : "null";
     const titleF = title ? title : "null";
     const fromPriceF = fromPrice ? fromPrice : -1;
     const toPriceF = toPrice ? toPrice : -1;
-    navigate(`/searchresults/${titleF}/${categoryF}/${fromPriceF}/${toPriceF}`);
+    navigate(`/searchresults/${titleF}/${locationF}/${categoryF}/${fromPriceF}/${toPriceF}`);
   }
 
   const navbarStyle = {
@@ -62,7 +65,7 @@ const [toPrice, setToPrice] = useState('');
               onChange={(e) => setTitle(e.target.value)} 
               className="me-2"
               aria-label="Search"
-              style={{ maxWidth: '60%' }} 
+              style={{ maxWidth: '50%' }} 
             />
 
             <Button variant="success" className="ms-2" type="submit" style={{ marginRight: '10px' }}>Search</Button>
@@ -79,12 +82,18 @@ const [toPrice, setToPrice] = useState('');
               </Dropdown.Menu>
             </Dropdown>
             
-            <Button variant="outline-light" className="ms-2" onClick={togglePriceDropdown} style={{ marginRight: '20px' }}>
+
+<Button variant="outline-light" className="ms-2" onClick={togglePriceDropdown} >
               Price
             </Button>
+
+<Button variant="outline-light" className="ms-2" onClick={toggleLocationDropdowns} style={{ marginRight: '15px' }}>
+              Location
+            </Button>
           </Form>
+
           {priceDropdown && (
-            <div className="position-relative bg-white p-3" style={{ zIndex: 1000 }}>
+            <div className="position-relative bg-white p-3" style={{ zIndex: 1000, marginRight: '25px' }}>
               <h6>Price</h6>
               <InputGroup>
                 <FormControl placeholder="from" value={fromPrice} onChange={(e) => setFromPrice(e.target.value)} />
@@ -95,6 +104,25 @@ const [toPrice, setToPrice] = useState('');
               </Button>
             </div>
           )}
+
+          {LocationDropdowns && (
+            <div className="position-relative bg-white p-3" style={{ zIndex: 1000 }}>
+              <h6>Location</h6>
+              <FormControl
+              type="search"
+              placeholder=""
+              value={location}
+              onChange={(e) => setLocation(e.target.value)} 
+              className="me-2"
+              aria-label="Search"
+              style={{ maxWidth: '100%' }} 
+            />
+              <Button variant="outline-secondary" className="w-100 mt-2" onClick={toggleLocationDropdowns}>
+                Apply
+              </Button>
+            </div>
+          )}
+
           <Nav className="ms-auto">
             <Nav.Link href="/myads" style={{ color: '#fff', marginRight: '5px' }}>{currentUser.email}</Nav.Link>
             <Button variant="danger" onClick={handleLogout}> Log Out</Button>

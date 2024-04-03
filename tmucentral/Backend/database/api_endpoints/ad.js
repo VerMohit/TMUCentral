@@ -82,9 +82,10 @@ exports.searchAd = async(req, res) => {
 
 exports.searchAds = async(req, res) => {
     try{
-        const {title,category, fromPrice, toPrice } = req.body;
+        const {title,location,category, fromPrice, toPrice } = req.body;
         let query = {};
         if (title!=="null") query.title = title;
+        if (location!=="null") query.location = location;
         if (category!=="null") query.category = category;
         if (fromPrice!=="-1") query.price = { $gte: parseFloat(fromPrice) };
         if (toPrice!=="-1") query.price = { ...query.price, $lte: parseFloat(toPrice) };

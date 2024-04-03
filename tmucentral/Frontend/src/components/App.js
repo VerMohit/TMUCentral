@@ -17,7 +17,7 @@ import ForgotPassword from './ForgotPassword';
 import MyAdDisplayCard from './MyAdDisplayCard';
 import Footer from './Footer';
 import SearchResult from './SearchResult';
-
+import AdminPrivateRoute from './AdminPrivateRoute';
   async function handleFormSubmit(path, data, msg) { 
     const PORT = process.env.PORT || 3005;
     const url = `http://localhost:${PORT}/api/database/${path}`;
@@ -67,7 +67,7 @@ function App() {
           } />
      </Route>
 
-     <Route path="/searchresults/:title/:category/:fromPrice/:toPrice" element={
+     <Route path="/searchresults/:title/:location/:category/:fromPrice/:toPrice" element={
       <SearchResult/>
     } />
 
@@ -78,10 +78,13 @@ function App() {
     <Route path="/login" element={
       <Login onFormSubmit={handleFormSubmit}/>
     } />
-    <Route path="/admin" element={<AdminDashboard/>} />
     <Route path="/myads" element={<MyAdDisplayCard/>} />
     <Route element={<PrivateRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
+     </Route>
+
+     <Route element={<AdminPrivateRoute />}>
+            <Route path="/admin" element={<AdminDashboard/>} />
      </Route>
   </Routes>
   </AuthProvider>  

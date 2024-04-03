@@ -10,7 +10,7 @@ import NavBar from './NavBar';
 const SearchResult = () => {
     const navigate = useNavigate() 
     const [ads, setAds] = useState([]);
-    let {title,category,fromPrice,toPrice} = useParams();
+    let {title,location,category,fromPrice,toPrice} = useParams();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -25,6 +25,7 @@ const SearchResult = () => {
                     },
                     body: JSON.stringify({
                         title: title,
+                        location: location,
                         category: category,
                         fromPrice: fromPrice,
                         toPrice: toPrice

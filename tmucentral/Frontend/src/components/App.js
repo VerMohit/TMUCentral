@@ -13,7 +13,7 @@ import PrivateRoute from './PrivateRoute';
 import { AuthProvider } from "../contexts/AuthContext" 
 import Dashboard from './Dashboard'; 
 import {useState } from 'react';
-
+import ForgotPassword from './ForgotPassword';
 import MyAdDisplayCard from './MyAdDisplayCard';
 import Footer from './Footer';
 import SearchResult from './SearchResult';
@@ -38,9 +38,6 @@ import SearchResult from './SearchResult';
         }
   
         console.log("Data Submitted: ", responseData);
-        if (msg) {
-          alert(msg);
-        }
         
     } catch (err) {
         console.error(err);
@@ -53,6 +50,8 @@ function App() {
 <BrowserRouter>
 <AuthProvider>  
   <Routes>
+  <Route path="/forgot-password" element={<ForgotPassword/>} />
+
   <Route path='/postad' element={
       <PostAd onFormSubmit={handleFormSubmit}/> 
   } />  

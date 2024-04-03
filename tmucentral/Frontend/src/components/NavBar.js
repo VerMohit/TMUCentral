@@ -96,7 +96,7 @@ const [toPrice, setToPrice] = useState('');
             </div>
           )}
           <Nav className="ms-auto">
-            <Nav.Link href="/register" style={{ color: '#fff', marginRight: '5px' }}>{currentUser.email}</Nav.Link>
+            <Nav.Link href="/myads" style={{ color: '#fff', marginRight: '5px' }}>{currentUser.email}</Nav.Link>
             <Button variant="danger" onClick={handleLogout}> Log Out</Button>
             <Link to="/postad" className="ms-2">
               <Button variant="warning" style={{ color: 'white' }}>Post ad</Button>

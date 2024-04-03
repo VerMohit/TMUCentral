@@ -7,18 +7,24 @@ import { useAuth } from "../contexts/AuthContext"
 const MyAdDisplayCard = () => {
     const [ads, setAds] = useState([]);
     const { currentUser, logout } = useAuth()
+
     useEffect(() => {
       const fetchData = async () => {
           const PORT = process.env.PORT || 3005;
-          const url = `http://localhost:${PORT}/api/database/searchAd`;
+          const url = `http://localhost:${PORT}/api/database/searchAds`;
           const userEmail = currentUser.email
           try {
+             const price = {
+                    $gte: parseFloat(100),
+                    $lte: parseFloat(130)
+                }
+
               const response = await fetch(url, {
                   method: 'POST', 
                   headers: {
                       'Content-Type': 'application/json',
                   },
-                  body: JSON.stringify({ email: userEmail }), 
+                  body: JSON.stringify({price: price}), 
               });
   
               if (!response.ok) {
@@ -39,6 +45,7 @@ const MyAdDisplayCard = () => {
   
       fetchData();
   }, []); 
+
   
     return (
         <Container className="ad-grid-container">

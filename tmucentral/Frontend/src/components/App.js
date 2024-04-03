@@ -12,9 +12,11 @@ import AdminDashboard from './AdminDashboard';
 import PrivateRoute from './PrivateRoute';
 import { AuthProvider } from "../contexts/AuthContext" 
 import Dashboard from './Dashboard'; 
+import {useState } from 'react';
 
 import MyAdDisplayCard from './MyAdDisplayCard';
 import Footer from './Footer';
+import SearchResult from './SearchResult';
 
   async function handleFormSubmit(path, data, msg) { 
     const PORT = process.env.PORT || 3005;
@@ -58,7 +60,7 @@ function App() {
   <Route element={<PrivateRoute />}>
             <Route path="/" element={
              <div> 
-             <NavBar></NavBar> <br></br>
+             <NavBar></NavBar> <br></br>     
              <div>
              <AdDisplayCard></AdDisplayCard>
              </div>
@@ -66,9 +68,14 @@ function App() {
           } />
      </Route>
 
+     <Route path="/searchresults/:title/:category/:fromPrice/:toPrice" element={
+      <SearchResult/>
+    } />
+
     <Route path="/register" element={
       <Register onFormSubmit={handleFormSubmit}/>
     } />
+    
     <Route path="/login" element={
       <Login onFormSubmit={handleFormSubmit}/>
     } />

@@ -32,8 +32,11 @@ exports.postAds = async(req, res) => {
 // Update single or multiple fields associated with ad based on its ID
 exports.patchAds = async(req, res) => {
     try{
-        const adID = req.params.id;
-        const result = await model.Ad.findOneAndUpdate({_id: adID}, req.body, {new: true});
+        const result = await model.Ad.findOneAndUpdate(
+            {_id: req.params.id}, 
+            req.body, 
+            {new: true}
+        );
         console.log(result);
         res.status(201).send({'Ads': result});
     }
@@ -112,5 +115,16 @@ exports.getAdTags = async(req, res) => {
     } catch (err) {
         // console.error(err); // Log the error for debugging
         res.status(500).send({ 'error': err.message });
+    }
+};
+
+// Delete ad from DB
+exports.deleteAd = async(req, res) => {
+    try{
+        const result = await model.Ad.deleteOne({_id: req.params.id});
+        res.status(200).send({'deletedCount': result.deletedCount})
+    }
+    catch(err) {
+        res.status(500).send({'error': err.message});
     }
 };

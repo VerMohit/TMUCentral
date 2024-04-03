@@ -48,16 +48,8 @@ exports.searchUser = async(req, res) => {
 // // Setting up parameterized URL and Query Stiring param
 // // Return a single user based on their id
 exports.getUserID = async(req, res) => {  
-    // console.log({
-    //     "requestParams": req.params,
-    //     "requestQuery": req.query, 
-    // });
-    try{
-        const {id: userID} = req.params; //destructuring
-        // console.log('here');
-        // console.log(userID);
-        const result = await model.User.findById(userID);
-        // console.log(result);
+    try {
+        const result = await model.User.findById(req.params.id);
         // Check to see if user with specified id exists in DB
         if(!result) {
             res.status(404).send({'error': `No user found with id ${userID}`});
@@ -74,9 +66,12 @@ exports.getUserID = async(req, res) => {
 // Update a user based on their ide, completely, in DB
 exports.putUserID = async(req, res) => {  
     try{
-        const {id: userID} = req.params;
         // Find the object in DB and replace it. the new args is a flag returning the changed data
-        const result = await model.User.findOneAndReplace({_id: userID}, req.body, {new: true});  
+        const result = await model.User.findOneAndReplace(
+            {_id: req.params.id}, 
+            req.body, 
+            {new: true}
+        );  
         console.log(result);
         res.status(200).send({result});
     }
@@ -89,8 +84,11 @@ exports.putUserID = async(req, res) => {
 // Update specific properties of user instead of replacing entire entry
 exports.patchUser = async(req, res) => {
     try{
-        const {id: userID} = req.params;
-        const result = await model.User.findOneAndUpdate({_id: userID}, req.body, {new: true});  // Find the object in DB and replace it. the new args is a flag returning the changed data
+        const result = await model.User.findOneAndUpdate(
+            {_id: req.params.id}, 
+            req.body, 
+            {new: true}
+        );  // Find the object in DB and replace it. the new args is a flag returning the changed data
         console.log(result);
         res.status(200).send({result});
     }
@@ -102,8 +100,7 @@ exports.patchUser = async(req, res) => {
 // Delete user from DB
 exports.deleteUser = async(req, res) => {
     try{
-        const {id: userID} = req.params;
-        const result = await model.User.deleteOne({_id: userID});
+        const result = await model.User.deleteOne({_id: req.params.id});
         res.status(200).send({'deletedCount': result.deletedCount})
     }
     catch(err) {

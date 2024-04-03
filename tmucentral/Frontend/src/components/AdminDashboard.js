@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, ListGroup, Card } from 'react-bootstrap';
+import {Button, Container, Row, Col, ListGroup, Card } from 'react-bootstrap';
 import AdCard from './AdCard';
 export default function AdminDashboard() {
   const [users, setUsers] = useState([]);
@@ -41,6 +41,30 @@ export default function AdminDashboard() {
     setActiveMenu(menuKey);
   };
 
+
+  async function handleDelete(type,itemId) {
+    const PORT = process.env.PORT || 3005;
+    const url = `http://localhost:${PORT}/api/database/${type}/${itemId}`;
+    try {
+        const response = await fetch(url, {
+            method: "DELETE",
+            headers: {"Content-Type": "application/json"}
+        });
+        
+        if (!response.ok) {
+            throw new Error("Network response was not okay");
+        }
+        
+        const responseData = await response.json();
+        console.log("Data Submitted: ", responseData);
+        setAds(currentAds => currentAds.filter(ad => ad._id !== itemId));
+        setUsers(currentUsers => currentUsers.filter(user => user._id !== itemId));
+        
+    } catch (err) {
+        console.error("Error deleting the item: ", err);
+    }
+  };
+
   return (
     <Container fluid>
       <Row>
@@ -59,6 +83,7 @@ export default function AdminDashboard() {
                 <Card.Title>Manage Ads</Card.Title>
                 <ListGroup>
                   {ads.map((ad,index) => (
+                    <div>
                     <AdCard
                     price={ad.price}
                     title={ad.title}
@@ -67,6 +92,9 @@ export default function AdminDashboard() {
                     postDate={ad.postDate}
                     location={ad.location}
                 />
+                <Button variant="primary" >Edit</Button> <nbsp></nbsp>
+                <Button variant="danger" onClick={() => handleDelete("deleteAd",ad._id)}>Delete</Button>
+                </div>
                   ))}
                 </ListGroup>
 
@@ -82,7 +110,9 @@ export default function AdminDashboard() {
                   {users.map((user, index) => (
                     <ListGroup.Item key={index}>
                       <strong>Name:</strong> {user.name} <br />
-                      <strong>Email:</strong> {user.email}
+                      <strong>Email:</strong> {user.email} <br />
+                      <strong>Id:</strong> {user._id} <br />
+                      <Button variant="danger" onClick={() => handleDelete("users/id",user._id)}>Delete</Button>
                     </ListGroup.Item>
                   ))}
                 </ListGroup>

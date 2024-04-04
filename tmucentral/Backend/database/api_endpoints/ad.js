@@ -99,7 +99,7 @@ exports.searchAds = async(req, res) => {
 
             query.title = { "$regex": titleResult.join("|"), "$options": "i" };
         }
-        if (location!=="null") query.location = location;
+        // if (location!=="null") query.location = location;
         // if (category!=="null") query.category = category;
         // if (fromPrice!=="-1") query.price = { $gte: parseFloat(fromPrice) };
         // if (toPrice!=="-1") query.price = { ...query.price, $lte: parseFloat(toPrice) };

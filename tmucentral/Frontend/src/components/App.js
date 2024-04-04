@@ -18,6 +18,8 @@ import MyAdDisplayCard from './MyAdDisplayCard';
 import Footer from './Footer';
 import SearchResult from './SearchResult';
 import AdminPrivateRoute from './AdminPrivateRoute';
+import AdPage from './AdPage';
+
   async function handleFormSubmit(path, data, msg) { 
     const PORT = process.env.PORT || 3005;
     const url = `http://localhost:${PORT}/api/database/${path}`;
@@ -86,6 +88,9 @@ function App() {
      <Route element={<AdminPrivateRoute />}>
             <Route path="/admin" element={<AdminDashboard/>} />
      </Route>
+
+     <Route path="/ad/:adId" element={<AdPage />} />
+
   </Routes>
   </AuthProvider>  
 </BrowserRouter>

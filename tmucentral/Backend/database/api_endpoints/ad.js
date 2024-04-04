@@ -1,4 +1,5 @@
 const model = require('../model');
+const { removeStopwords } = require('stopword');
 
 // Retreive all advertisements
 exports.getAds = async(req, res) => {
@@ -78,13 +79,26 @@ exports.searchAd = async(req, res) => {
     }
 };
 
-
-
 exports.searchAds = async(req, res) => {
     try{
         const {title,location,category, fromPrice, toPrice } = req.body;
+
         let query = {};
-        if (title!=="null") query.title = title;
+        if (title!=="null") {
+            const specialChars = /[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/g;
+
+            // Format title to not have uppercase or special characters
+            let keywordTitle = title.toLowerCase().replace(specialChars, '');
+
+            // Remove repeating words
+            keywordTitle = keywordTitle.split(' ');
+            keywordTitle = [...new Set(keywordTitle)];
+
+            // Filter title to not have common english words (aka stopwords)
+            titleResult = removeStopwords(keywordTitle);
+
+            query.title = { "$regex": titleResult.join("|"), "$options": "i" };
+        }
         if (location!=="null") query.location = location;
         if (category!=="null") query.category = category;
         if (fromPrice!=="-1") query.price = { $gte: parseFloat(fromPrice) };
@@ -113,22 +127,6 @@ exports.getAdById = async (req, res) => {
         res.status(200).send(ad);
     } catch (err) {
         res.status(500).send({'error': err.message});
-    }
-};
-
-
-// Retrieve all advertisements based on a series of tags
-// sample endpoint: '/api/ads/tags/tag1,tag2,...,tagn
-exports.getAdTags = async(req, res) => {
-    try {
-        const adTags = req.params.tags.split(',');
-        // console.log("Tags:", prodTags); // Log prodTags to check its format
-        const result = await model.Ad.find({ "tags.tag": { $in: adTags } });
-        // console.log("Result:", result); // Log the result to see what's returned
-        res.status(200).send({ 'Ads': result });
-    } catch (err) {
-        // console.error(err); // Log the error for debugging
-        res.status(500).send({ 'error': err.message });
     }
 };
 

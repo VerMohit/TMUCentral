@@ -30,12 +30,12 @@ const NavBar = ({ onFormSubmit }) => {
       lowercaseLocation = lowercaseLocation.substring(1);
       locationF = FirstUppercaseLocation + lowercaseLocation;
     }
-    const categoryF = category ? category : "null";
+    // const categoryF = category ? category : "null";
     const titleF = title ? title : "null";
-    const fromPriceF = fromPrice ? fromPrice : -1;
-    const toPriceF = toPrice ? toPrice : -1;
+    // const fromPriceF = fromPrice ? fromPrice : -1;
+    // const toPriceF = toPrice ? toPrice : -1;
     // navigate(`/searchresults/${titleF}/${locationF}/${categoryF}/${fromPriceF}/${toPriceF}`);
-    navigate(`/searchresults/${titleF}/${locationF}`);
+    navigate(`/searchresults/${titleF}`);
   }
 
   const navbarStyle = {

@@ -135,7 +135,7 @@ import NavBar from './NavBar';
 const SearchResult = ({ onFormSubmit }) => {
     const navigate = useNavigate()
     const [ads, setAds] = useState([]);
-    let { title, location, category, fromPrice, toPrice } = useParams();
+    let {title} = useParams();
     //const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedLocation, setSelectedLocation] = useState("");
     const categories = [
@@ -160,7 +160,6 @@ const SearchResult = ({ onFormSubmit }) => {
                     },
                     body: JSON.stringify({
                         title: title,
-                        location: location,
                     }),
                 });
 
@@ -182,7 +181,7 @@ const SearchResult = ({ onFormSubmit }) => {
         };
 
         fetchData();
-    }, [title, location]);
+    }, [title]);
 
     const handleSelectCategory = (category) => {
         setSelectedCategory(category);
@@ -240,6 +239,8 @@ const SearchResult = ({ onFormSubmit }) => {
     }
 
     return (
+        <div>
+        <NavBar></NavBar> <br></br>
         <Container className="ad-grid-container">
             <Row>
                 <Col md={3}>
@@ -273,6 +274,7 @@ const SearchResult = ({ onFormSubmit }) => {
                 </Col>
             </Row>
         </Container>
+        </div>
     );
 };
 

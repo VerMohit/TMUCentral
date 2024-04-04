@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, ListGroup, Card } from 'react-bootstrap';
+import {Button, Container, Row, Col, ListGroup, Card } from 'react-bootstrap';
 import AdCard from './AdCard';
+import NavBar from './NavBar';
+import { Link, useNavigate } from "react-router-dom"; 
 export default function AdminDashboard() {
   const [users, setUsers] = useState([]);
   const [activeMenu, setActiveMenu] = useState(''); 
   const [ads, setAds] = useState([]);
-
+  const navigate = useNavigate(); 
   useEffect(() => {
       const PORT = process.env.PORT || 3005;
       const url = `http://localhost:${PORT}/api/database/getAds`;
@@ -41,7 +43,34 @@ export default function AdminDashboard() {
     setActiveMenu(menuKey);
   };
 
+
+  async function handleDelete(type,itemId) {
+    const PORT = process.env.PORT || 3005;
+    const url = `http://localhost:${PORT}/api/database/${type}/${itemId}`;
+    try {
+        const response = await fetch(url, {
+            method: "DELETE",
+            headers: {"Content-Type": "application/json"}
+        });
+        
+        if (!response.ok) {
+            throw new Error("Network response was not okay");
+        }
+        
+        const responseData = await response.json();
+        console.log("Data Submitted: ", responseData);
+        setAds(currentAds => currentAds.filter(ad => ad._id !== itemId));
+        setUsers(currentUsers => currentUsers.filter(user => user._id !== itemId));
+        
+    } catch (err) {
+        console.error("Error deleting the item: ", err);
+    }
+  };
+
   return (
+    <div>
+    <NavBar></NavBar>
+    <br></br>
     <Container fluid>
       <Row>
         <Col md={3} className="mb-3">
@@ -49,7 +78,7 @@ export default function AdminDashboard() {
           <ListGroup>
             <ListGroup.Item action href="#manage-ads" onClick={() => handleMenuSelect('manage-ads')}>Manage Ads</ListGroup.Item>
             <ListGroup.Item action href="#manage-users" onClick={() => handleMenuSelect('manage-users')}>Manage Users</ListGroup.Item>
-            <ListGroup.Item action href="#site-content" onClick={() => handleMenuSelect('site-content')}>Site Content</ListGroup.Item>
+            <ListGroup.Item action href="#site-content" onClick={() => navigate('/')}>Site Content</ListGroup.Item>
           </ListGroup>
         </Col>
         <Col md={9}>
@@ -59,6 +88,7 @@ export default function AdminDashboard() {
                 <Card.Title>Manage Ads</Card.Title>
                 <ListGroup>
                   {ads.map((ad,index) => (
+                    <div>
                     <AdCard
                     price={ad.price}
                     title={ad.title}
@@ -67,6 +97,8 @@ export default function AdminDashboard() {
                     postDate={ad.postDate}
                     location={ad.location}
                 />
+                <Button variant="danger" onClick={() => handleDelete("deleteAd",ad._id)}>Delete</Button>
+                </div>
                   ))}
                 </ListGroup>
 
@@ -82,7 +114,9 @@ export default function AdminDashboard() {
                   {users.map((user, index) => (
                     <ListGroup.Item key={index}>
                       <strong>Name:</strong> {user.name} <br />
-                      <strong>Email:</strong> {user.email}
+                      <strong>Email:</strong> {user.email} <br />
+                      <strong>Id:</strong> {user._id} <br />
+                      <Button variant="danger" onClick={() => handleDelete("deleteUser",user._id)}>Delete</Button>
                     </ListGroup.Item>
                   ))}
                 </ListGroup>
@@ -93,5 +127,6 @@ export default function AdminDashboard() {
         </Col>
       </Row>
     </Container>
+    </div>
   );
 }

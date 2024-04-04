@@ -12,10 +12,12 @@ import AdminDashboard from './AdminDashboard';
 import PrivateRoute from './PrivateRoute';
 import { AuthProvider } from "../contexts/AuthContext" 
 import Dashboard from './Dashboard'; 
-
+import {useState } from 'react';
+import ForgotPassword from './ForgotPassword';
 import MyAdDisplayCard from './MyAdDisplayCard';
 import Footer from './Footer';
-
+import SearchResult from './SearchResult';
+import AdminPrivateRoute from './AdminPrivateRoute';
   async function handleFormSubmit(path, data, msg) { 
     const PORT = process.env.PORT || 3005;
     const url = `http://localhost:${PORT}/api/database/${path}`;
@@ -36,9 +38,6 @@ import Footer from './Footer';
         }
   
         console.log("Data Submitted: ", responseData);
-        if (msg) {
-          alert(msg);
-        }
         
     } catch (err) {
         console.error(err);
@@ -51,6 +50,8 @@ function App() {
 <BrowserRouter>
 <AuthProvider>  
   <Routes>
+  <Route path="/forgot-password" element={<ForgotPassword/>} />
+
   <Route path='/postad' element={
       <PostAd onFormSubmit={handleFormSubmit}/> 
   } />  
@@ -58,7 +59,7 @@ function App() {
   <Route element={<PrivateRoute />}>
             <Route path="/" element={
              <div> 
-             <NavBar></NavBar> <br></br>
+             <NavBar></NavBar> <br></br>     
              <div>
              <AdDisplayCard></AdDisplayCard>
              </div>
@@ -66,16 +67,24 @@ function App() {
           } />
      </Route>
 
+     <Route path="/searchresults/:title/:location/:category/:fromPrice/:toPrice" element={
+      <SearchResult/>
+    } />
+
     <Route path="/register" element={
       <Register onFormSubmit={handleFormSubmit}/>
     } />
+    
     <Route path="/login" element={
       <Login onFormSubmit={handleFormSubmit}/>
     } />
-    <Route path="/admin" element={<AdminDashboard/>} />
     <Route path="/myads" element={<MyAdDisplayCard/>} />
     <Route element={<PrivateRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
+     </Route>
+
+     <Route element={<AdminPrivateRoute />}>
+            <Route path="/admin" element={<AdminDashboard/>} />
      </Route>
   </Routes>
   </AuthProvider>  

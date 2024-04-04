@@ -3,10 +3,15 @@ import { Container, Row, Col } from 'react-bootstrap';
 import AdCard from './AdCard';
 import './AdDisplayCard.css'; 
 import { useAuth } from "../contexts/AuthContext"
+import NavBar from './NavBar';
+import { useLocation } from 'react-router-dom';
+
 
 const MyAdDisplayCard = () => {
     const [ads, setAds] = useState([]);
-    const { currentUser, logout } = useAuth()
+    const { currentUser, logout } = useAuth();
+    const location = useLocation();
+
     useEffect(() => {
       const fetchData = async () => {
           const PORT = process.env.PORT || 3005;
@@ -18,7 +23,7 @@ const MyAdDisplayCard = () => {
                   headers: {
                       'Content-Type': 'application/json',
                   },
-                  body: JSON.stringify({ email: userEmail }), 
+                  body: JSON.stringify({email: userEmail}), 
               });
   
               if (!response.ok) {
@@ -38,9 +43,13 @@ const MyAdDisplayCard = () => {
       };
   
       fetchData();
-  }, []); 
+  }, [location.state]); 
+
   
     return (
+        <div>
+        <NavBar></NavBar> <br></br>
+        <h2 style={{marginLeft:"50px"}}>My Ads</h2>
         <Container className="ad-grid-container">
             {ads.map((ad) => (
                 <AdCard
@@ -53,6 +62,7 @@ const MyAdDisplayCard = () => {
                 />
             ))}
         </Container>
+        </div>
     );
 };
 

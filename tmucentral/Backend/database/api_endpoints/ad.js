@@ -32,8 +32,11 @@ exports.postAds = async(req, res) => {
 // Update single or multiple fields associated with ad based on its ID
 exports.patchAds = async(req, res) => {
     try{
-        const adID = req.params.id;
-        const result = await model.Ad.findOneAndUpdate({_id: adID}, req.body, {new: true});
+        const result = await model.Ad.findOneAndUpdate(
+            {_id: req.params.id}, 
+            req.body, 
+            {new: true}
+        );
         console.log(result);
         res.status(201).send({'Ads': result});
     }
@@ -75,6 +78,32 @@ exports.searchAd = async(req, res) => {
     }
 };
 
+
+
+exports.searchAds = async(req, res) => {
+    try{
+        const {title,location,category, fromPrice, toPrice } = req.body;
+        let query = {};
+        if (title!=="null") query.title = title;
+        if (location!=="null") query.location = location;
+        if (category!=="null") query.category = category;
+        if (fromPrice!=="-1") query.price = { $gte: parseFloat(fromPrice) };
+        if (toPrice!=="-1") query.price = { ...query.price, $lte: parseFloat(toPrice) };
+
+        console.log(req.body.email);
+        const result = await model.Ad.find(query);
+        if(result == 0){
+            res.status(404).send({'error': 'No results returned'});
+        }
+        else {
+            res.status(200).send({'Ad': result});
+        }
+    }
+    catch(err){
+        res.status(500).send({'error': err.message});
+    }
+};
+
 // Retrieve all advertisements based on a series of tags
 // sample endpoint: '/api/ads/tags/tag1,tag2,...,tagn
 exports.getAdTags = async(req, res) => {
@@ -87,5 +116,16 @@ exports.getAdTags = async(req, res) => {
     } catch (err) {
         // console.error(err); // Log the error for debugging
         res.status(500).send({ 'error': err.message });
+    }
+};
+
+// Delete ad from DB
+exports.deleteAd = async(req, res) => {
+    try{
+        const result = await model.Ad.deleteOne({_id: req.params.id});
+        res.status(200).send({'deletedCount': result.deletedCount})
+    }
+    catch(err) {
+        res.status(500).send({'error': err.message});
     }
 };

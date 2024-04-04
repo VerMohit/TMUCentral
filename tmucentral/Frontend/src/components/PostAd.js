@@ -52,12 +52,17 @@ const PostAd = ({ onFormSubmit }) => {
   }
 
   async function submitAd(imageBase64) {
+    let inputLocation = locationRef.current.value;
+    let lowercaseLocation = inputLocation.toLowerCase();
+    let FirstUppercaseLocation = lowercaseLocation.substring(0, 1).toUpperCase();
+    lowercaseLocation = lowercaseLocation.substring(1);
+    let location = FirstUppercaseLocation + lowercaseLocation;
     const newAd = {
       postDate: Date.now(),
       title: titleRef.current.value,
       description: descriptionRef.current.value,
       price: priceRef.current.value,
-      location: locationRef.current.value,
+      location: location,
       sold: false,
       image: imageBase64,
       category: category,

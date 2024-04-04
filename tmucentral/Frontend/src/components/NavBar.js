@@ -23,9 +23,14 @@ const [toPrice, setToPrice] = useState('');
     
     e.preventDefault()
     console.log("Test button");
-
+    let locationF = "null";
+    if (location) {
+      let lowercaseLocation = location.toLowerCase();
+      let FirstUppercaseLocation = lowercaseLocation.substring(0, 1).toUpperCase();
+      lowercaseLocation = lowercaseLocation.substring(1);
+      locationF = FirstUppercaseLocation + lowercaseLocation;
+    }
     const categoryF = category ? category : "null";
-    const locationF = location ? location : "null";
     const titleF = title ? title : "null";
     const fromPriceF = fromPrice ? fromPrice : -1;
     const toPriceF = toPrice ? toPrice : -1;

@@ -49,6 +49,9 @@ const MyAdDisplayCard = () => {
   async function handleDelete(itemId) {
     const PORT = process.env.PORT || 3005;
     const url = `http://localhost:${PORT}/api/database/deleteAd/${itemId}`;
+
+    if (!window.confirm("Are you sure you want to delete this ad?")) return;
+
     try {
         const response = await fetch(url, {
             method: "DELETE",

@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import {Button, Container, Row, Col, ListGroup, Card } from 'react-bootstrap';
 import AdCard from './AdCard';
 import NavBar from './NavBar';
+import { Link, useNavigate } from "react-router-dom"; 
 export default function AdminDashboard() {
   const [users, setUsers] = useState([]);
   const [activeMenu, setActiveMenu] = useState(''); 
   const [ads, setAds] = useState([]);
-
+  const navigate = useNavigate(); 
   useEffect(() => {
       const PORT = process.env.PORT || 3005;
       const url = `http://localhost:${PORT}/api/database/getAds`;
@@ -77,7 +78,7 @@ export default function AdminDashboard() {
           <ListGroup>
             <ListGroup.Item action href="#manage-ads" onClick={() => handleMenuSelect('manage-ads')}>Manage Ads</ListGroup.Item>
             <ListGroup.Item action href="#manage-users" onClick={() => handleMenuSelect('manage-users')}>Manage Users</ListGroup.Item>
-            <ListGroup.Item action href="#site-content" onClick={() => handleMenuSelect('site-content')}>Site Content</ListGroup.Item>
+            <ListGroup.Item action href="#site-content" onClick={() => navigate('/')}>Site Content</ListGroup.Item>
           </ListGroup>
         </Col>
         <Col md={9}>

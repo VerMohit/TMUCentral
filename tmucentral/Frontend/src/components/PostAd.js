@@ -17,7 +17,7 @@ const PostAd = ({ onFormSubmit }) => {
   const [image, setImage] = useState(null);
   const email = currentUser.email;
   const navigate = useNavigate() 
-
+  const imgN = "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg";
   const handleCategorySelect = (cat) => {
     setCategory(cat);
   };
@@ -43,7 +43,8 @@ const PostAd = ({ onFormSubmit }) => {
         };
         reader.readAsDataURL(image);
       } else {
-        submitAd("");
+
+        submitAd(imgN);
       }
     } catch {
       setError("Failed to post advertisement");

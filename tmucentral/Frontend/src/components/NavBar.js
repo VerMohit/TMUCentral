@@ -92,6 +92,8 @@ const NavBar = ({ onFormSubmit }) => {
             <Button variant="outline-light" className="ms-2" onClick={toggleLocationDropdowns} style={{ marginRight: '15px' }}>
               Location
             </Button>
+
+            <Link to="/your-target-path" className="btn btn-danger ms-2" style={{ marginRight: '10px' }}> Inbox </Link>
           </Form>
 
           {/*

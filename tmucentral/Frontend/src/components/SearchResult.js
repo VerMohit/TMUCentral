@@ -122,20 +122,6 @@
 // export default SearchResult;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import AdCard from './AdCard';
@@ -185,8 +171,9 @@ const SearchResult = ({ onFormSubmit }) => {
                     setAds(data.Ad);
                 } else {
                     console.error("No ads found");
-                    alert("No ads found");
-                    navigate("/");
+                    setAds([])
+                    // alert("No ads found");
+                    // navigate("/");
                 }
             } catch (err) {
                 console.error(err);
@@ -194,7 +181,7 @@ const SearchResult = ({ onFormSubmit }) => {
         };
 
         fetchData();
-    }, []);
+    }, [title, location]);
 
     const handleSelectCategory = (category) => {
         setSelectedCategory(category);

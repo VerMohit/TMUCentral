@@ -19,6 +19,7 @@ import Footer from './Footer';
 import SearchResult from './SearchResult';
 import AdminPrivateRoute from './AdminPrivateRoute';
 import AdPage from './AdPage';
+import Chat from './Chat';
 
   async function handleFormSubmit(path, data, msg) { 
     const PORT = process.env.PORT || 3005;
@@ -57,6 +58,9 @@ function App() {
   <Route path='/postad' element={
       <PostAd onFormSubmit={handleFormSubmit}/> 
   } />  
+  <Route path='/chat' element={
+      <Chat sellerEmail='ok@ok.ok' /> 
+  } />
   
   <Route element={<PrivateRoute />}>
             <Route path="/" element={

@@ -7,6 +7,7 @@ router
     .get('/getUsers', _user.getUsers) // Security issue for printing all Users
     .post('/postUser', _user.postUser)
     .post('/searchUser', _user.searchUser)
+    .get('/users/id/:email', _user.getUserEmail)
     .get('/getUserById/:id', _user.getUserID)
     //.put('/putUserById/:id', _user.putUserID) // Very Dangerous - Use Patch instead
     .patch('/patchUser/:id', _user.patchUser)

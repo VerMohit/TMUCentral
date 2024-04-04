@@ -33,4 +33,5 @@ const Review = model('Review', new Schema({
     description: {type: String, required: true}
 }));
 
+
 module.exports = {User, Ad, Review}

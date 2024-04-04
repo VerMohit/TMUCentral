@@ -22,10 +22,6 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.card:hover {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
 .card-img-top {
     border-top-left-radius: calc(0.375rem - 1px);
     border-top-right-radius: calc(0.375rem - 1px);

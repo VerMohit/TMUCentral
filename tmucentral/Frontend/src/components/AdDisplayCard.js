@@ -10,9 +10,9 @@ const AdDisplayCard = ({ onFormSubmit }) => {
     //const [selectedCategory, setSelectedCategory] = useState(null);
     const categories = [
         { name: "All" }, 
-        { name: "Academic Services", id: "Academic Services" }, 
-        { name: "Items for Sale", id: "Items for Sale" }, 
-        { name: "Items Wanted", id: "Items Wanted" }
+        { name: "Academic Services"}, 
+        { name: "Items for Sale" }, 
+        { name: "Items Wanted" }
     ];
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedPriceRange, setSelectedPriceRange] = useState("");
@@ -54,12 +54,19 @@ const AdDisplayCard = ({ onFormSubmit }) => {
         });
     };
 
-    const filterAdsByCategory = (ads, categoryId) => {
-        if (!categoryId || categoryId === "All") return ads; // No filter applied
-        return ads.filter(ad => ad.category === categoryId);
+    const filterAdsByCategory = (ads, selectedCategoryName) => {
+        if (!selectedCategoryName || selectedCategoryName === "All") return ads;
+        return ads.filter(ad => {
+            return ad.category.includes(selectedCategoryName); 
+        });
     };
+    
 
     const filteredAds = filterAdsByCategory(filterAdsByPrice(ads, selectedPriceRange), selectedCategory);
+
+    if (!ads) {
+        return <div>Loading...</div>;
+      }
 
     return (
         <Container className="ad-grid-container">

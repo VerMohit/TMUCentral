@@ -80,8 +80,8 @@ function App() {
               </div>
             } />
           </Route>
-
-          <Route path="/searchresults/:title/:location/:category/:fromPrice/:toPrice" element={
+          {/* <Route path="/searchresults/:title/:location/:category/:fromPrice/:toPrice" */}
+          <Route path="/searchresults/:title/:location" element={
             <SearchResult />
           } />
 

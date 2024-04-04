@@ -34,7 +34,8 @@ const NavBar = ({ onFormSubmit }) => {
     const titleF = title ? title : "null";
     const fromPriceF = fromPrice ? fromPrice : -1;
     const toPriceF = toPrice ? toPrice : -1;
-    navigate(`/searchresults/${titleF}/${locationF}/${categoryF}/${fromPriceF}/${toPriceF}`);
+    // navigate(`/searchresults/${titleF}/${locationF}/${categoryF}/${fromPriceF}/${toPriceF}`);
+    navigate(`/searchresults/${titleF}/${locationF}`);
   }
 
   const navbarStyle = {

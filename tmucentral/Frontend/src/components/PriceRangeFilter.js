@@ -33,33 +33,36 @@ const PriceRangeFilter = ({ onSelectPriceRange }) => {
                     onChange={(e) => onSelectPriceRange(e.target.value)}
                 />
             ))}
-            <div className="custom-price-range mt-3"
-                style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
-            >
-                <Form.Label>Custom Price Range:</Form.Label>
-                <Col xs={2} md={2}>
+            <div className="custom-price-range mt-3">   
+                <Form.Label style={{}}>Custom Price Range</Form.Label>
+                <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'row', gap: "5px"}}>
+                <Col xs={4} md={4}>
                     <Form.Control
-                        type="number"
+                        type="numeric"
                         placeholder="Min"
                         value={customMin}
                         onChange={(e) => setCustomMin(e.target.value)}
+                        style={{ fontSize: "0.8em"}}
                     />
                 </Col>
-                <Col xs={2} md={2}>
+                <Col xs={4} md={4}>
                     <Form.Control
-                        type="number"
+                        type="numeric"
                         placeholder="Max"
                         value={customMax}
                         onChange={(e) => setCustomMax(e.target.value)}
+                        style={{ fontSize: "0.8em"}}
                     />
                 </Col>
                 <Button
                     variant="primary"
                     type="submit"
                     onClick={handleCustomPriceSubmit}
+                    style={{ fontSize: "0.8em"}}
                 >
                     Submit
                 </Button>
+                </div>
             </div>
         </Form>
     )

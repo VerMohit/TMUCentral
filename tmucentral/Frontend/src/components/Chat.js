@@ -11,7 +11,11 @@ function Chat() {
   const { currentUser } = useAuth();
   const email = currentUser.email;
   const location = useLocation();
-  const { sellerEmail } = location.state || {};
+  let { sellerEmail } = location.state || {};
+
+  if (!sellerEmail) {
+    sellerEmail = email;
+  }
 
 
   console.log("Email: ", email);

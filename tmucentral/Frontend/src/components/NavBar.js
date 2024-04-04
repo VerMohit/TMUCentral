@@ -93,7 +93,7 @@ const NavBar = ({ onFormSubmit }) => {
               Location
             </Button> */}
 
-            <Link to="/your-target-path" className="btn btn-danger ms-2" style={{ marginRight: '10px' }}> Inbox </Link>
+            <Link to="/chat" className="btn btn-danger ms-2" style={{ marginRight: '10px' }}> Inbox </Link>
           </Form>
 
           {/*

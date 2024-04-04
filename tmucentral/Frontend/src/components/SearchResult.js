@@ -11,6 +11,7 @@ const SearchResult = () => {
     const navigate = useNavigate() 
     const [ads, setAds] = useState([]);
     let {title,location,category,fromPrice,toPrice} = useParams();
+    const [alertShown, setAlertShown] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -33,8 +34,11 @@ const SearchResult = () => {
                 });
     
                 if (!response.ok) {
-                    navigate("/");
+                    // alert("No ads found")
+                    // navigate("/");
+                    // alert("No ads found")
                     throw new Error("Network response was not okay");
+
                 }
     
                 const data = await response.json();
@@ -43,10 +47,17 @@ const SearchResult = () => {
                     setAds(data.Ad); 
                 } else {
                     console.error("No ads found");
-                    navigate("/");
+                    // alert("No ads found");
+                    // navigate("/");
                 }
             } catch (err) {
                 console.error(err);
+                if (!alertShown) { // Only show alert if it hasn't been shown before
+                    setAlertShown(true); // Mark the alert as shown
+                    alert("No ads found TEST");
+                }
+                // alert("No ads found");
+                navigate("/");
             }
         };
     

@@ -48,7 +48,8 @@ const MyAdDisplayCard = () => {
   
     return (
         <div>
-        <NavBar></NavBar>
+        <NavBar></NavBar> <br></br>
+        <h2 style={{marginLeft:"50px"}}>My Ads</h2>
         <Container className="ad-grid-container">
             {ads.map((ad) => (
                 <AdCard

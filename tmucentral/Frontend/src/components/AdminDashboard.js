@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {Button, Container, Row, Col, ListGroup, Card } from 'react-bootstrap';
 import AdCard from './AdCard';
+import NavBar from './NavBar';
 export default function AdminDashboard() {
   const [users, setUsers] = useState([]);
   const [activeMenu, setActiveMenu] = useState(''); 
@@ -66,6 +67,9 @@ export default function AdminDashboard() {
   };
 
   return (
+    <div>
+    <NavBar></NavBar>
+    <br></br>
     <Container fluid>
       <Row>
         <Col md={3} className="mb-3">
@@ -92,7 +96,6 @@ export default function AdminDashboard() {
                     postDate={ad.postDate}
                     location={ad.location}
                 />
-                <Button variant="primary" >Edit</Button> <nbsp></nbsp>
                 <Button variant="danger" onClick={() => handleDelete("deleteAd",ad._id)}>Delete</Button>
                 </div>
                   ))}
@@ -112,7 +115,7 @@ export default function AdminDashboard() {
                       <strong>Name:</strong> {user.name} <br />
                       <strong>Email:</strong> {user.email} <br />
                       <strong>Id:</strong> {user._id} <br />
-                      <Button variant="danger" onClick={() => handleDelete("users/id",user._id)}>Delete</Button>
+                      <Button variant="danger" onClick={() => handleDelete("deleteUser",user._id)}>Delete</Button>
                     </ListGroup.Item>
                   ))}
                 </ListGroup>
@@ -123,5 +126,6 @@ export default function AdminDashboard() {
         </Col>
       </Row>
     </Container>
+    </div>
   );
 }

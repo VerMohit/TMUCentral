@@ -30,17 +30,17 @@ const NavBar = ({ onFormSubmit }) => {
       lowercaseLocation = lowercaseLocation.substring(1);
       locationF = FirstUppercaseLocation + lowercaseLocation;
     }
-    const categoryF = category ? category : "null";
+    // const categoryF = category ? category : "null";
     const titleF = title ? title : "null";
-    const fromPriceF = fromPrice ? fromPrice : -1;
-    const toPriceF = toPrice ? toPrice : -1;
+    // const fromPriceF = fromPrice ? fromPrice : -1;
+    // const toPriceF = toPrice ? toPrice : -1;
     // navigate(`/searchresults/${titleF}/${locationF}/${categoryF}/${fromPriceF}/${toPriceF}`);
-    navigate(`/searchresults/${titleF}/${locationF}`);
+    navigate(`/searchresults/${titleF}`);
   }
 
   const navbarStyle = {
     backgroundColor: '#004c9b',
-    paddingInline: '2rem' // Adding inline padding
+    paddingInline: '18rem' // Adding inline padding
   };
 
   const handleCategorySelect = (cat) => {
@@ -93,7 +93,7 @@ const NavBar = ({ onFormSubmit }) => {
               Location
             </Button> */}
 
-            <Link to="/your-target-path" className="btn btn-danger ms-2" style={{ marginRight: '10px' }}> Inbox </Link>
+            <Link to="/chat" className="btn btn-danger ms-2" style={{ marginRight: '10px' }}> Inbox </Link>
           </Form>
 
           {/*
@@ -138,6 +138,7 @@ const NavBar = ({ onFormSubmit }) => {
           )}
 
           <Nav className="ms-auto">
+            {/* <Nav.Link href="/myads" style={{ color: '#fff', marginRight: '5px' }}>{currentUser.email}</Nav.Link> */}
             <Nav.Link href="/myads" style={{ color: '#fff', marginRight: '5px' }}>{currentUser.email.split('@torontomu.ca')[0]}</Nav.Link>
             <Button variant="danger" onClick={handleLogout}> Log Out</Button>
             <Link to="/postad" className="ms-2">

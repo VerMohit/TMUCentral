@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Card, Form, Button, InputGroup, FormControl, DropdownButton, Dropdown, Col, Row, Alert } from 'react-bootstrap';
-
+import NavPostAd from './NavPostAd';
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
 
@@ -114,6 +114,8 @@ const PostAd = ({ onFormSubmit }) => {
   }
 
   return (
+    <>
+    <NavPostAd></NavPostAd>
     <Card className="my-4 mx-auto" style={{ maxWidth: '800px' }}>
       <Card.Body>
         <h2 className="text-center mb-4">Post New Advertisement</h2>
@@ -194,6 +196,7 @@ const PostAd = ({ onFormSubmit }) => {
         </Form>
       </Card.Body>
     </Card>
+    </>
   );
 };
 

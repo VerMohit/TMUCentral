@@ -57,7 +57,7 @@ function Chat() {
     <Session appId="t5jYSKwc" syncUser={syncUser}>
       <Inbox
         syncConversation={syncConversation}
-        style={{ width: '100%', height: '99vh' }}
+        style={{ width: '100%', height: '85vh' }}
       ></Inbox>
     </Session>
   );

@@ -137,6 +137,7 @@ const SearchResult = ({ onFormSubmit }) => {
     const [ads, setAds] = useState([]);
     let { title, location, category, fromPrice, toPrice } = useParams();
     //const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedLocation, setSelectedLocation] = useState("");
     const categories = [
         { name: "All" },
         { name: "Academic Services" },
@@ -191,6 +192,11 @@ const SearchResult = ({ onFormSubmit }) => {
         setSelectedPriceRange(priceRange);
     }
 
+    const onSelectLocation = (selectedLocation) => {
+        
+        setSelectedLocation(selectedLocation);
+    }
+
     // Helper function to parse price range and filter ads
     const filterAdsByPrice = (ads, priceRange) => {
         if (!priceRange) return ads; // No filter applied
@@ -212,16 +218,28 @@ const SearchResult = ({ onFormSubmit }) => {
         });
     };
 
+    const filterAdsByLocation = (ads, selectedLocation) => {
+        
+        if (!selectedLocation) return ads;
+        else {
+                let lowercaseLocation = selectedLocation.toLowerCase();
+                let FirstUppercaseLocation = lowercaseLocation.substring(0, 1).toUpperCase();
+                lowercaseLocation = lowercaseLocation.substring(1);
+                selectedLocation = FirstUppercaseLocation + lowercaseLocation;
+        }
+        return ads.filter(ad => {
+            return ad.location.includes(selectedLocation);
+        });
+    };
 
-    const filteredAds = filterAdsByCategory(filterAdsByPrice(ads, selectedPriceRange), selectedCategory);
+
+    const filteredAds = filterAdsByLocation(filterAdsByCategory(filterAdsByPrice(ads, selectedPriceRange), selectedCategory),selectedLocation);
 
     if (!ads) {
         return <div>Loading...</div>;
     }
 
     return (
-        <div>
-        <NavBar></NavBar> <br></br>
         <Container className="ad-grid-container">
             <Row>
                 <Col md={3}>
@@ -229,6 +247,7 @@ const SearchResult = ({ onFormSubmit }) => {
                         categories={categories}
                         onSelectCategory={handleSelectCategory}
                         onSelectPriceRange={onSelectPriceRange}
+                        onSelectLocation={onSelectLocation}
                     />
                 </Col>
                 <Col md={9}>
@@ -254,7 +273,6 @@ const SearchResult = ({ onFormSubmit }) => {
                 </Col>
             </Row>
         </Container>
-        </div>
     );
 };
 

@@ -72,7 +72,7 @@ const NavBar = ({ onFormSubmit }) => {
               onChange={(e) => setTitle(e.target.value)}
               className="me-2"
               aria-label="Search"
-              style={{ maxWidth: '50%' }}
+              style={{ maxWidth: '70%' }}
             />
 
             <Button variant="success" className="ms-2" type="submit" style={{ marginRight: '10px' }}>Search</Button>
@@ -89,9 +89,9 @@ const NavBar = ({ onFormSubmit }) => {
               </Dropdown.Menu>
             </Dropdown>
             */}
-            <Button variant="outline-light" className="ms-2" onClick={toggleLocationDropdowns} style={{ marginRight: '15px' }}>
+            {/* <Button variant="outline-light" className="ms-2" onClick={toggleLocationDropdowns} style={{ marginRight: '15px' }}>
               Location
-            </Button>
+            </Button> */}
 
             <Link to="/your-target-path" className="btn btn-danger ms-2" style={{ marginRight: '10px' }}> Inbox </Link>
           </Form>

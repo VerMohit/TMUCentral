@@ -39,6 +39,7 @@ const [toPrice, setToPrice] = useState('');
 
   const navbarStyle = {
     backgroundColor: '#004c9b',
+    paddingInline: '2rem' // Adding inline padding
   };
 
   const handleCategorySelect = (cat) => {

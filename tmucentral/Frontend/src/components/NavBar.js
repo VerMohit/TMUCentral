@@ -40,7 +40,7 @@ const NavBar = ({ onFormSubmit }) => {
 
   const navbarStyle = {
     backgroundColor: '#004c9b',
-    paddingInline: '18rem' // Adding inline padding
+    paddingInline: '2rem' // Adding inline padding
   };
 
   const handleCategorySelect = (cat) => {

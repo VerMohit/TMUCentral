@@ -4,7 +4,7 @@ import AdCard from './AdCard';
 import './AdDisplayCard.css'; 
 import { useAuth } from "../contexts/AuthContext"
 import NavBar from './NavBar';
-import { useLocation, useNavigate, createSearchParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, createSearchParams } from 'react-router-dom';
 
 
 const MyAdDisplayCard = () => {
@@ -79,6 +79,7 @@ const MyAdDisplayCard = () => {
         <Container className="ad-grid-container">
             {ads.map((ad) => (
                 <div>
+                <Link to={`/ad/${ad._id}`} style={{ textDecoration: 'none' }}>
                 <AdCard
                     price={ad.price}
                     title={ad.title}
@@ -87,6 +88,7 @@ const MyAdDisplayCard = () => {
                     postDate={ad.postDate}
                     location={ad.location}
                 />
+                </Link>
                 <Button variant="warning" onClick={() => navigate({
                     pathname: "/editad",
                     search: createSearchParams({

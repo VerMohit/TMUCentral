@@ -9,6 +9,9 @@ function Chat(sellerEmail) {
 
   const { currentUser } = useAuth();
   const email = currentUser.email;
+
+  console.log("Email: ", email);
+  console.log("Seller Email: ", sellerEmail);
   
   const syncUser = useCallback(
     () =>
@@ -26,12 +29,13 @@ function Chat(sellerEmail) {
 
   const syncConversation = useCallback((session) => {
     // JavaScript SDK code here
-    const conversation = session.getOrCreateConversation('welcome');
+    const roomID = email + '-' + sellerEmail.sellerEmail;
+    const conversation = session.getOrCreateConversation(roomID);
 
     const other = new Talk.User({
-      id: 'frank',
-      name: 'Frank',
-      email: 'frank@example.com',     // for email notification when person is offline
+      id: sellerEmail.sellerEmail,
+      name: sellerEmail.sellerEmail.split('@')[0],
+      email: sellerEmail.sellerEmail,     // for email notification when person is offline
       // photoUrl: 'undefined',
       // welcomeMessage: 'Hey, how can I help?',
       role: 'seller',

@@ -13,6 +13,7 @@ import PrivateRoute from './PrivateRoute';
 import { AuthProvider } from "../contexts/AuthContext" //not working
 import Dashboard from './Dashboard'; //not working
 import Footer from './Footer';
+import Chat from './Chat';
 
 
   // Manage server API POST for new form submissions
@@ -56,6 +57,9 @@ function App() {
   <Route path='/postad' element={
       <PostAd onFormSubmit={handleFormSubmit}/> 
   } />  
+  <Route path='/chat' element={
+      <Chat sellerEmail='ok@ok.ok' /> 
+  } />
   
   <Route element={<PrivateRoute />}>
             <Route path="/" element={

@@ -7,6 +7,7 @@ router
     .get('/getUsers', _user.getUsers)
     .post('/postUser', _user.postUser)
     .post('/searchUser', _user.searchUser)
+    .get('/users/id/:email', _user.getUserEmail)
     .get('/users/id/:id', _user.getUserID)
     .put('/users/id/:id', _user.putUserID)
     .patch('/users/id/:id', _user.patchUser)

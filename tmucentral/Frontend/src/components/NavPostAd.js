@@ -33,7 +33,7 @@ const NavPostAd = () => {
 
 
           <Nav className="ms-auto">
-            <Nav.Link href="/myads" style={{ color: '#fff', marginRight: '5px' }}>{currentUser.email}</Nav.Link>
+            <Nav.Link href="/myads" style={{ color: '#fff', marginRight: '5px' }}>{currentUser.email.split('@torontomu.ca')[0]}</Nav.Link>
             <Button variant="danger" onClick={handleLogout}> Log Out</Button>
           </Nav>
         </Navbar.Collapse>

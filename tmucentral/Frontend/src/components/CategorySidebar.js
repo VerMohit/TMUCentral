@@ -43,7 +43,7 @@ const CategorySidebar = ({ categories, onSelectCategory, onSelectPriceRange, onS
             <PriceRangeFilter onSelectPriceRange={onSelectPriceRange} />
             <h5 style={subHeaderStyle}>Location</h5>
             <Form>
-            <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'row'}}>   
+            <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'row', gap: "5px"}}>   
             <FormControl
               type="search"
               placeholder="Enter Location"
@@ -51,9 +51,9 @@ const CategorySidebar = ({ categories, onSelectCategory, onSelectPriceRange, onS
               onChange={(e) => setLocation(e.target.value)}
               className="me-2"
               aria-label="Search"
-              style={{ maxWidth: '70%' }}
+              style={{ maxWidth: '50%' }}
             />
-            <Button variant="primary" className="ms-1" onClick = {handleLocationSubmit} style={{ marginRight: '10px' }}>Submit</Button>
+            <Button variant="primary" className="ms-2" onClick = {handleLocationSubmit} style={{ marginRight: '10px' }}>Submit</Button>
              </div>
             </Form>
         </>

@@ -38,49 +38,56 @@ const AdPage = () => {
   return (
     <Container className="ad-page-container my-5">
       <Row className="justify-content-md-center">
-        <Col lg={6}>
+        {/* Image column */}
+        <Col md={6}>
           <Card>
             <Card.Img
               variant="top"
               src={ad.image}
               alt={ad.title}
             />
-            <Card.Body>
-              <Card.Title>{ad.title}</Card.Title>
-              <Card.Text>
-                <span className="text-muted">{ad.location}</span>
-              </Card.Text>
-              <Card.Text className="ad-description">{ad.description}</Card.Text>
-            </Card.Body>
           </Card>
         </Col>
-        <Col lg={4}>
-          <ListGroup
-            variant="flush"
-            className="ad-details-list"
-          >
-            <ListGroup.Item>
-              <h4>Price: ${ad.price}</h4>
-            </ListGroup.Item>
-            <ListGroup.Item>
-              <p>Category: {ad.category.join(", ") || "Not specified"}</p>
-            </ListGroup.Item>
-            <ListGroup.Item>
-              <p>Posted on: {new Date(ad.postDate).toLocaleDateString()}</p>
-            </ListGroup.Item>
-            <ListGroup.Item>
-              <Button
-                variant="primary"
-                onClick={handleContactSeller}
-              >
-                Contact Seller
-              </Button>
-            </ListGroup.Item>
-          </ListGroup>
+        {/* Details column */}
+        <Col md={6}>
+          <Card className="h-100">
+            <Card.Body>
+              <Card.Title className="mt-3 mb-3 display-5">{ad.title}</Card.Title>
+              <Card.Text>
+                <strong>Location: </strong>
+                <span className="text-muted">{ad.location}</span>
+              </Card.Text>
+              <Card.Text className="ad-description mb-3">
+                <strong>Details: </strong>
+                {ad.description}
+              </Card.Text>
+              <ListGroup variant="flush" className="ad-details-list">
+                <ListGroup.Item>
+                  <h4>Price: ${ad.price}</h4>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <p>Category: {ad.category.join(", ") || "Not specified"}</p>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <p>Condition: {ad.condition || "Not specified"}</p>
+                </ListGroup.Item>
+                {/* Include more details as required */}
+                <ListGroup.Item>
+                  <p>Posted on: {new Date(ad.postDate).toLocaleDateString()}</p>
+                </ListGroup.Item>
+                <ListGroup.Item className="d-flex justify-content-center align-items-center">
+                  <Button variant="primary" onClick={handleContactSeller}>
+                    Contact Seller
+                  </Button>
+                </ListGroup.Item>
+              </ListGroup>
+            </Card.Body>
+          </Card>
         </Col>
       </Row>
     </Container>
   );
+  
 };
 
 export default AdPage;

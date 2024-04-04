@@ -19,6 +19,9 @@ router
     .post('/searchAds', _ad.searchAds) 
     // .get('/ads/tags/:tags', _ad.getAdTags) // no longer in use
     .delete('/deleteAd/:id', _ad.deleteAd)
+    // To get data about a specific ad
+    .get('/getAdById/:id', _ad.getAdById)
+
 
     // Review Table no longer in use
     // .get('/getReview', _review.getReview)

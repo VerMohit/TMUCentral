@@ -88,15 +88,15 @@ const SearchResult = () => {
 
             <Container className="ad-grid-container">
                 <Row>
-                    <Col md={3}>
+                    {/* <Col md={3}>
                         <CategorySidebar
                             categories={categories}
                             onSelectCategory={handleSelectCategory}
                             onSelectPriceRange={onSelectPriceRange}
                         />
-                    </Col>
-                    <Col md={9}>
-                        <Row> {/* Start of Ad Cards Grid */}
+                    </Col> */}
+                    {/* <Col md={9}>
+                        <Row> */}
                             {ads.map((ad) => (
                                 <Col sm={6} lg={4} xl={3} key={ad._id}> {/* Adjust the size props as needed */}
                                     <Link to={`/ad/${ad._id}`} style={{ textDecoration: 'none' }}>
@@ -111,8 +111,8 @@ const SearchResult = () => {
                                     </Link>
                                 </Col>
                             ))}
-                        </Row>
-                    </Col>
+                        {/* </Row>
+                    </Col> */}
                 </Row>
             </Container>
         </div>

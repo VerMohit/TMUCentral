@@ -1,14 +1,21 @@
 import { useCallback } from 'react';
+import { useLocation } from 'react-router-dom';
 import Talk from 'talkjs';
 import { Session, Inbox } from '@talkjs/react';
 import { useAuth } from "../contexts/AuthContext" // access to auth API
 
-function Chat(sellerEmail) {
+function Chat() {
   const PORT = process.env.PORT || 3005;
   const url = `http://localhost:${PORT}/api/database/getUserEmail`;
 
   const { currentUser } = useAuth();
   const email = currentUser.email;
+  const location = useLocation();
+  const { sellerEmail } = location.state || {};
+  
+
+  console.log("Email: ", email);
+  console.log(sellerEmail);
 
   console.log("Email: ", email);
   console.log("Seller Email: ", sellerEmail);
@@ -33,9 +40,9 @@ function Chat(sellerEmail) {
     const conversation = session.getOrCreateConversation(roomID);
 
     const other = new Talk.User({
-      id: sellerEmail.sellerEmail,
-      name: sellerEmail.sellerEmail.split('@')[0],
-      email: sellerEmail.sellerEmail,     // for email notification when person is offline
+      id: sellerEmail,
+      name: sellerEmail.split('@')[0],
+      email: sellerEmail,     // for email notification when person is offline
       // photoUrl: 'undefined',
       // welcomeMessage: 'Hey, how can I help?',
       role: 'seller',

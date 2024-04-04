@@ -58,9 +58,7 @@ function App() {
   <Route path='/postad' element={
       <PostAd onFormSubmit={handleFormSubmit}/> 
   } />  
-  <Route path='/chat' element={
-      <Chat sellerEmail='ok@ok.ok' /> 
-  } />
+   <Route path='/chat' element={<Chat />} />
   
   <Route element={<PrivateRoute />}>
             <Route path="/" element={

@@ -113,6 +113,10 @@ const PostAd = ({ onFormSubmit }) => {
     return sizeInKB; // Return size in KB
   }
 
+  function handleCancel() {
+    navigate("/");
+  }
+
   return (
     <>
       <NavPostAd></NavPostAd>
@@ -173,30 +177,35 @@ const PostAd = ({ onFormSubmit }) => {
               {image && <img src={URL.createObjectURL(image)} alt="Uploaded" style={{ maxWidth: '100px', marginTop: '10px' }} />}
             </Form.Group>
 
-            <Row className="mb-3">
-              <Col sm="6">
-                <DropdownButton
-                  id="dropdown-item-button"
-                  title={category ? category.replace(/([A-Z])/g, ' $1').trim() : "Select a category"} // Show selected category or default text
-                  variant="light"
-                  className="text-secondary w-100"
-                  ref={categoryRef}>
-                  <Dropdown.Item onClick={() => handleCategorySelect('Academic Services')}>Academic Services</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleCategorySelect('Items for Sale')}>Items for Sale</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleCategorySelect('Items Wanted')}>Items Wanted</Dropdown.Item>
-                </DropdownButton>
-              </Col>
-              <Col sm="6">
-                <Button variant="primary" type="submit" className="w-100">
-                  Submit Ad
-                </Button>
-              </Col>
-
-            </Row>
-          </Form>
-        </Card.Body>
-      </Card>
-    </>
+          <Row className="mb-3">
+            <Col sm="6">
+              <DropdownButton 
+                id="dropdown-item-button" 
+                title={category ? category.replace(/([A-Z])/g, ' $1').trim() : "Select a category"} // Show selected category or default text
+                variant="light"
+                className="text-secondary w-100"
+                ref={categoryRef}>
+                <Dropdown.Item onClick={() => handleCategorySelect('Academic Services')}>Academic Services</Dropdown.Item>
+                <Dropdown.Item onClick={() => handleCategorySelect('Items for Sale')}>Items for Sale</Dropdown.Item>
+                <Dropdown.Item onClick={() => handleCategorySelect('Items Wanted')}>Items Wanted</Dropdown.Item>
+              </DropdownButton>
+            </Col>
+          </Row>
+          <Row className="mb-3">
+            <Col sm="6">
+              <Button variant="primary" type="submit" className="w-100">
+                Submit Ad
+              </Button>
+            </Col>
+            <Col sm="6">
+              <Button variant="secondary" type="button" className="w-100" onClick={handleCancel}>
+                Cancel
+              </Button>
+            </Col>
+          </Row>
+        </Form>
+      </Card.Body>
+    </Card>
   );
 };
 

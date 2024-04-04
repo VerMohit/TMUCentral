@@ -7,6 +7,7 @@ import AdDisplayCard from './AdDisplayCard';
 import NavBar from './NavBar';
 import { DEFAULT_MIN_BREAKPOINT } from 'react-bootstrap/esm/ThemeProvider';
 import PostAd from './PostAd';
+import EditAd from './EditAd';
 import Login from './Login';
 import AdminDashboard from './AdminDashboard';
 import PrivateRoute from './PrivateRoute';
@@ -21,12 +22,12 @@ import AdminPrivateRoute from './AdminPrivateRoute';
 import AdPage from './AdPage';
 import Chat from './Chat';
 
-  async function handleFormSubmit(path, data, msg) { 
+  async function handleFormSubmit(path, data, msg, inputMethod="POST") { 
     const PORT = process.env.PORT || 3005;
     const url = `http://localhost:${PORT}/api/database/${path}`;
     try {
         const response = await fetch(url, {
-            method: "POST", 
+            method: inputMethod, 
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(data)
         });
@@ -57,6 +58,9 @@ function App() {
 
   <Route path='/postad' element={
       <PostAd onFormSubmit={handleFormSubmit}/> 
+  } />  
+  <Route path='/editad' element={
+      <EditAd onFormSubmit={handleFormSubmit}/> 
   } />  
    <Route path='/chat' element={
       <>

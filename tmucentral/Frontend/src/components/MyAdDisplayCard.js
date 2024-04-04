@@ -4,13 +4,14 @@ import AdCard from './AdCard';
 import './AdDisplayCard.css'; 
 import { useAuth } from "../contexts/AuthContext"
 import NavBar from './NavBar';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate, createSearchParams } from 'react-router-dom';
 
 
 const MyAdDisplayCard = () => {
     const [ads, setAds] = useState([]);
     const { currentUser, logout } = useAuth();
     const location = useLocation();
+    const navigate = useNavigate() 
 
     useEffect(() => {
       const fetchData = async () => {
@@ -86,6 +87,13 @@ const MyAdDisplayCard = () => {
                     postDate={ad.postDate}
                     location={ad.location}
                 />
+                <Button variant="warning" onClick={() => navigate({
+                    pathname: "/editad",
+                    search: createSearchParams({
+                        adId: ad._id
+                    }).toString()
+                })}>Edit</Button>
+                {/* <Button variant="warning" onClick={() => navigate("/editad")}>Edit</Button> */}
                 <Button variant="danger" onClick={() => handleDelete(ad._id)}>Delete</Button>
                 </div>
             ))}

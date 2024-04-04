@@ -87,7 +87,7 @@ const AdPage = () => {
       </Row>
     </Container>
   );
-  
+
 };
 
 export default AdPage;

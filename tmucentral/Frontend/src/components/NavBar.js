@@ -3,7 +3,7 @@ import { Container, Navbar, Nav, Form, FormControl, Button, Dropdown, InputGroup
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from "../contexts/AuthContext";
 
-const NavBar = ({onFormSubmit}) => {
+const NavBar = ({ onFormSubmit }) => {
   const titleRef = useRef();
   const [priceDropdown, setPriceDropdown] = useState(false);
   const [LocationDropdowns, setLocationDropdowns] = useState(false);
@@ -13,14 +13,14 @@ const NavBar = ({onFormSubmit}) => {
   const toggleLocationDropdowns = () => setLocationDropdowns(!LocationDropdowns);
   const { currentUser, logout } = useAuth();
   const [error, setError] = useState("")
-  const navigate = useNavigate() 
+  const navigate = useNavigate()
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
   const [fromPrice, setFromPrice] = useState('');
-const [toPrice, setToPrice] = useState('');
+  const [toPrice, setToPrice] = useState('');
 
   async function handleSubmit(e) {
-    
+
     e.preventDefault()
     console.log("Test button");
     let locationF = "null";
@@ -48,10 +48,10 @@ const [toPrice, setToPrice] = useState('');
 
   async function handleLogout() {
     setError("")
-  
+
     try {
       await logout()
-      navigate("/login") 
+      navigate("/login")
     } catch {
       setError("Failed to log out")
     }
@@ -60,7 +60,7 @@ const [toPrice, setToPrice] = useState('');
   return (
     <Navbar style={navbarStyle} variant="dark" expand="lg" className="shadow-sm">
       <Container fluid>
-        <Navbar.Brand href="/" style={{ color: '#fff'}}>TMUCENTRAL</Navbar.Brand>
+        <Navbar.Brand href="/" style={{ color: '#fff' }}>TMUCENTRAL</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Form onSubmit={handleSubmit} className="d-flex flex-grow-1 justify-content-center">
@@ -68,10 +68,10 @@ const [toPrice, setToPrice] = useState('');
               type="search"
               placeholder="What are you looking for?"
               value={title}
-              onChange={(e) => setTitle(e.target.value)} 
+              onChange={(e) => setTitle(e.target.value)}
               className="me-2"
               aria-label="Search"
-              style={{ maxWidth: '50%' }} 
+              style={{ maxWidth: '50%' }}
             />
 
             <Button variant="success" className="ms-2" type="submit" style={{ marginRight: '10px' }}>Search</Button>
@@ -92,8 +92,8 @@ const [toPrice, setToPrice] = useState('');
               Location
             </Button>
           </Form>
-            
-            {/*
+
+          {/*
             
 
 <Button variant="outline-light" className="ms-2" onClick={togglePriceDropdown} >
@@ -115,19 +115,19 @@ const [toPrice, setToPrice] = useState('');
             </div>
           )}
           */}
-      
+
           {LocationDropdowns && (
             <div className="position-relative bg-white p-3" style={{ zIndex: 1000 }}>
               <h6>Location</h6>
               <FormControl
-              type="search"
-              placeholder=""
-              value={location}
-              onChange={(e) => setLocation(e.target.value)} 
-              className="me-2"
-              aria-label="Search"
-              style={{ maxWidth: '100%' }} 
-            />
+                type="search"
+                placeholder=""
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                className="me-2"
+                aria-label="Search"
+                style={{ maxWidth: '100%' }}
+              />
               <Button variant="outline-secondary" className="w-100 mt-2" onClick={toggleLocationDropdowns}>
                 Apply
               </Button>

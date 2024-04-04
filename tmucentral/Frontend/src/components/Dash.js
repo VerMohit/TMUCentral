@@ -6,14 +6,14 @@ import { Link, useNavigate } from "react-router-dom"
 export default function Dash() {
   const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
-  const navigate = useNavigate() 
+  const navigate = useNavigate()
 
   async function handleLogout() {
     setError("")
 
     try {
       await logout()
-      navigate("/login") 
+      navigate("/login")
     } catch {
       setError("Failed to log out")
     }

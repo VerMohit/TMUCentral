@@ -6,7 +6,7 @@ import { useAuth } from "../contexts/AuthContext";
 const NavPostAd = () => {
   const { currentUser, logout } = useAuth();
   const [error, setError] = useState("")
-  const navigate = useNavigate() 
+  const navigate = useNavigate()
 
   const navbarStyle = {
     backgroundColor: '#004c9b',
@@ -15,10 +15,10 @@ const NavPostAd = () => {
 
   async function handleLogout() {
     setError("")
-  
+
     try {
       await logout()
-      navigate("/login") 
+      navigate("/login")
     } catch {
       setError("Failed to log out")
     }
@@ -27,7 +27,7 @@ const NavPostAd = () => {
   return (
     <Navbar style={navbarStyle} variant="dark" expand="lg" className="shadow-sm">
       <Container fluid>
-        <Navbar.Brand href="/" style={{ color: '#fff'}}>TMUCENTRAL</Navbar.Brand>
+        <Navbar.Brand href="/" style={{ color: '#fff' }}>TMUCENTRAL</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
 

@@ -55,9 +55,9 @@ export default function ForgotPassword() {
     </>
   );
 
-  
-  return(<Header childComp={forgotPassProp}/>);
-  
+
+  return (<Header childComp={forgotPassProp} />);
+
 }
 
 
@@ -68,7 +68,7 @@ export default function ForgotPassword() {
 //           <h2 className="text-center mb-4">Sign Up</h2>
 //           {error && <Alert variant="danger">{error}</Alert>}
 //           <Form onSubmit={handleSubmit}>
-//           <Form.Group id="name" className="mb-3"> 
+//           <Form.Group id="name" className="mb-3">
 //              <Form.Label style={{ fontWeight: 'bold' }}>Full Name</Form.Label>
 //              <Form.Control type="text" ref={nameRef} required />
 //             </Form.Group>

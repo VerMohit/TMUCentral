@@ -1,12 +1,12 @@
 function ImageUpload() {
 
-    const[image,setImage]=useState("")
+  const [image, setImage] = useState("")
   function convertToBase64(e) {
     console.log(e);
-    var reader = new FileReader(); 
-    reader.readAsDataURL(e.target.files[0]); 
+    var reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
     reader.onload = () => {
-      console.log(reader.result); 
+      console.log(reader.result);
       setImage(reader.result);
     };
     reader.onerror = error => {
@@ -17,13 +17,13 @@ function ImageUpload() {
   return (
     <div className="auth-wrapper">
       <div className="auth-inner" style={{ width: "auto" }}>
-        Let's Upload Image<br/>
+        Let's Upload Image<br />
         <input
           accept="image/*"
           type="file"
           onChange={convertToBase64}
         />
-        {image=="" || image==null?"": <img width={100} height={100} src={image}/>}
+        {image == "" || image == null ? "" : <img width={100} height={100} src={image} />}
       </div>
     </div>
   );

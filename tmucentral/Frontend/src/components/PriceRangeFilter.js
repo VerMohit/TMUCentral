@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Form, Button, Col } from 'react-bootstrap';
 
 const priceRanges = [
@@ -10,7 +10,7 @@ const priceRanges = [
     { label: "Over 1000", value: "1000-10000" }
 ];
 
-const PriceRangeFilter = ( { onSelectPriceRange }) => {
+const PriceRangeFilter = ({ onSelectPriceRange }) => {
     const [customMin, setCustomMin] = useState('');
     const [customMax, setCustomMax] = useState('');
 

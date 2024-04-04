@@ -1,10 +1,10 @@
 import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
-import { Link, useNavigate } from "react-router-dom" 
+import { Link, useNavigate } from "react-router-dom"
 import Header from "./Header"
 
-export default function Register({onFormSubmit}) {
+export default function Register({ onFormSubmit }) {
   const emailRef = useRef()
   const passwordRef = useRef()
   const nameRef = useRef();
@@ -24,12 +24,12 @@ export default function Register({onFormSubmit}) {
       return setError("Passwords do not match")
     }
 
-    if(!emailRef.current.value.includes('@torontomu.ca')) {
-      
+    if (!emailRef.current.value.includes('@torontomu.ca')) {
+
       return setError("Invalid email entered")
     }
 
-    if(passwordRef.current.value.length < 8) {
+    if (passwordRef.current.value.length < 8) {
       return setError("Password must be at least 8 characters long")
     }
 
@@ -45,7 +45,7 @@ export default function Register({onFormSubmit}) {
       const msg = "Advertisement submitted successfully!";
       await onFormSubmit('/postUser', user, msg);
       console.log("test");
-      navigate("/") 
+      navigate("/")
     } catch {
       setError("Failed to create an account")
     }
@@ -54,43 +54,43 @@ export default function Register({onFormSubmit}) {
   }
 
 
- const registerProp = (<>
+  const registerProp = (<>
     <Card style={{ width: '50%', margin: '0 auto', marginTop: '20px' }}>
-    <Card.Body>
-      <h2 className="text-center mb-4">Sign Up</h2>
-      {error && <Alert variant="danger">{error}</Alert>}
-      <Form onSubmit={handleSubmit}>
-      <Form.Group id="name" className="mb-3"> 
-        <Form.Label style={{ fontWeight: 'bold' }}>Full Name</Form.Label>
-        <Form.Control type="text" ref={nameRef} required />
-        </Form.Group>
-        <Form.Group id="email" className="mb-3">
-          <Form.Label style={{ fontWeight: 'bold' }}>Email</Form.Label>
-          <Form.Control type="email" ref={emailRef} required />
-          <Form.Text muted>@torontomu.ca email needed!</Form.Text>
-        </Form.Group>
-        <Form.Group id="password" className="mb-3">
-          <Form.Label style={{ fontWeight: 'bold' }}>Password</Form.Label>
-          <Form.Control type="password" ref={passwordRef} required />
-          <Form.Text muted>Minimum of 8 characters needed!</Form.Text>
-        </Form.Group>
-        <Form.Group id="password-confirm" className="mb-3">
-          <Form.Label style={{ fontWeight: 'bold' }}>Password Confirmation</Form.Label>
-          <Form.Control type="password" ref={passwordConfirmRef} required />
-          <Form.Text muted>Minimum of 8 characters needed!</Form.Text>
-        </Form.Group>
-        <Button disabled={loading} className="w-100" type="submit">
-          Sign Up
-        </Button>
-      </Form>
-    </Card.Body>
-  </Card>
-  <div className="w-100 text-center mt-2">
-    Already have an account? <Link to="/login">Log In</Link>
-  </div>
+      <Card.Body>
+        <h2 className="text-center mb-4">Sign Up</h2>
+        {error && <Alert variant="danger">{error}</Alert>}
+        <Form onSubmit={handleSubmit}>
+          <Form.Group id="name" className="mb-3">
+            <Form.Label style={{ fontWeight: 'bold' }}>Full Name</Form.Label>
+            <Form.Control type="text" ref={nameRef} required />
+          </Form.Group>
+          <Form.Group id="email" className="mb-3">
+            <Form.Label style={{ fontWeight: 'bold' }}>Email</Form.Label>
+            <Form.Control type="email" ref={emailRef} required />
+            <Form.Text muted>@torontomu.ca email needed!</Form.Text>
+          </Form.Group>
+          <Form.Group id="password" className="mb-3">
+            <Form.Label style={{ fontWeight: 'bold' }}>Password</Form.Label>
+            <Form.Control type="password" ref={passwordRef} required />
+            <Form.Text muted>Minimum of 8 characters needed!</Form.Text>
+          </Form.Group>
+          <Form.Group id="password-confirm" className="mb-3">
+            <Form.Label style={{ fontWeight: 'bold' }}>Password Confirmation</Form.Label>
+            <Form.Control type="password" ref={passwordConfirmRef} required />
+            <Form.Text muted>Minimum of 8 characters needed!</Form.Text>
+          </Form.Group>
+          <Button disabled={loading} className="w-100" type="submit">
+            Sign Up
+          </Button>
+        </Form>
+      </Card.Body>
+    </Card>
+    <div className="w-100 text-center mt-2">
+      Already have an account? <Link to="/login">Log In</Link>
+    </div>
   </>
- );
+  );
 
-  return(<Header childComp={registerProp}/>);
+  return (<Header childComp={registerProp} />);
 
 }

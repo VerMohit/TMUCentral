@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col } from 'react-bootstrap'; 
+import { Container, Row, Col } from 'react-bootstrap';
 import AdCard from './AdCard';
 import CategorySidebar from './CategorySidebar';
 import { Link } from 'react-router-dom'
-import './AdDisplayCard.css'; 
+import './AdDisplayCard.css';
 
 const AdDisplayCard = ({ onFormSubmit }) => {
     const [ads, setAds] = useState([]);
     //const [selectedCategory, setSelectedCategory] = useState(null);
     const categories = [
-        { name: "All" }, 
-        { name: "Academic Services"}, 
-        { name: "Items for Sale" }, 
+        { name: "All" },
+        { name: "Academic Services" },
+        { name: "Items for Sale" },
         { name: "Items Wanted" }
     ];
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedPriceRange, setSelectedPriceRange] = useState("");
 
-  
+
     useEffect(() => {
         const PORT = process.env.PORT || 3005;
         const url = `http://localhost:${PORT}/api/database/getAds`;
@@ -30,7 +30,7 @@ const AdDisplayCard = ({ onFormSubmit }) => {
             })
             .then(ads => setAds(ads.Ads))
             .catch(err => console.error(err));
-    }, []); 
+    }, []);
 
     const handleSelectCategory = (category) => {
         setSelectedCategory(category);
@@ -57,16 +57,16 @@ const AdDisplayCard = ({ onFormSubmit }) => {
     const filterAdsByCategory = (ads, selectedCategoryName) => {
         if (!selectedCategoryName || selectedCategoryName === "All") return ads;
         return ads.filter(ad => {
-            return ad.category.includes(selectedCategoryName); 
+            return ad.category.includes(selectedCategoryName);
         });
     };
-    
+
 
     const filteredAds = filterAdsByCategory(filterAdsByPrice(ads, selectedPriceRange), selectedCategory);
 
     if (!ads) {
         return <div>Loading...</div>;
-      }
+    }
 
     return (
         <Container className="ad-grid-container">
@@ -80,23 +80,23 @@ const AdDisplayCard = ({ onFormSubmit }) => {
                 </Col>
                 <Col md={9}>
                     <Row> {/* Start of Ad Cards Grid */}
-                    {console.log}
+                        {console.log}
                         {filteredAds.map((ad) => (
-                            
+
                             <Col sm={6} lg={4} xl={3} key={ad._id}> {/* Adjust the size props as needed */}
-                            <Link to={`/ad/${ad._id}`} style={{ textDecoration: 'none' }}>
-                                <AdCard
-                                    price={ad.price}
-                                    title={ad.title}
-                                    description={ad.description}
-                                    image={ad.image}
-                                    postDate={ad.postDate}
-                                    location={ad.location}
-                                />
+                                <Link to={`/ad/${ad._id}`} style={{ textDecoration: 'none' }}>
+                                    <AdCard
+                                        price={ad.price}
+                                        title={ad.title}
+                                        description={ad.description}
+                                        image={ad.image}
+                                        postDate={ad.postDate}
+                                        location={ad.location}
+                                    />
                                 </Link>
                             </Col>
                         ))}
-                      
+
                     </Row>
                 </Col>
             </Row>

@@ -12,14 +12,14 @@ function Chat() {
   const email = currentUser.email;
   const location = useLocation();
   const { sellerEmail } = location.state || {};
-  
+
 
   console.log("Email: ", email);
   console.log(sellerEmail);
 
   console.log("Email: ", email);
   console.log("Seller Email: ", sellerEmail);
-  
+
   const syncUser = useCallback(
     () =>
       new Talk.User({

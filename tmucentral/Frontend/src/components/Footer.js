@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Container, Navbar, Nav, Form, FormControl, Button, Dropdown, InputGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const Footer = ({onFormSubmit}) => {
+const Footer = ({ onFormSubmit }) => {
   const titleRef = useRef();
   const [priceDropdown, setPriceDropdown] = useState(false);
 
@@ -11,7 +11,7 @@ const Footer = ({onFormSubmit}) => {
   async function handleSubmit(e) {
     e.preventDefault()
     try {
-      const data = {title: titleRef.current.value};
+      const data = { title: titleRef.current.value };
       const msg = "Results found!";
       await onFormSubmit('/searchAd', data, msg);
     } catch {
@@ -27,9 +27,9 @@ const Footer = ({onFormSubmit}) => {
   return (
     <Navbar style={navbarStyle} variant="dark" expand="lg" className="shadow-sm">
       <Container fluid>
-        <Navbar.Brand href="#" style={{ color: '#fff'}}>TMUCENTRAL</Navbar.Brand>
+        <Navbar.Brand href="#" style={{ color: '#fff' }}>TMUCENTRAL</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">     
+        <Navbar.Collapse id="navbarScroll">
           <Nav className="ms-auto">
           </Nav>
         </Navbar.Collapse>

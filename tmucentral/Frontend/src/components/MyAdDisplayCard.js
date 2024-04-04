@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col } from 'react-bootstrap'; 
+import { Button, Container, Row, Col } from 'react-bootstrap'; 
 import AdCard from './AdCard';
 import './AdDisplayCard.css'; 
 import { useAuth } from "../contexts/AuthContext"
@@ -46,12 +46,35 @@ const MyAdDisplayCard = () => {
   }, [location.state]); 
 
   
+  async function handleDelete(itemId) {
+    const PORT = process.env.PORT || 3005;
+    const url = `http://localhost:${PORT}/api/database/deleteAd/${itemId}`;
+    try {
+        const response = await fetch(url, {
+            method: "DELETE",
+            headers: {"Content-Type": "application/json"}
+        });
+        
+        if (!response.ok) {
+            throw new Error("Network response was not okay");
+        }
+        
+        const responseData = await response.json();
+        console.log("Data Submitted: ", responseData);
+        setAds(currentAds => currentAds.filter(ad => ad._id !== itemId));
+        
+    } catch (err) {
+        console.error("Error deleting the item: ", err);
+    }
+  };
+
     return (
         <div>
         <NavBar></NavBar> <br></br>
         <h2 style={{marginLeft:"50px"}}>My Ads</h2>
         <Container className="ad-grid-container">
             {ads.map((ad) => (
+                <div>
                 <AdCard
                     price={ad.price}
                     title={ad.title}
@@ -60,6 +83,8 @@ const MyAdDisplayCard = () => {
                     postDate={ad.postDate}
                     location={ad.location}
                 />
+                <Button variant="danger" onClick={() => handleDelete(ad._id)}>Delete</Button>
+                </div>
             ))}
         </Container>
         </div>

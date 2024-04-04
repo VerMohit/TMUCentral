@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link } from "react-router-dom"
+import Header from "./Header"
 
 export default function ForgotPassword() {
   const emailRef = useRef()
@@ -26,7 +27,8 @@ export default function ForgotPassword() {
     setLoading(false)
   }
 
-  return (
+
+  const forgotPassProp = (
     <>
       <Card style={{ width: '50%', margin: '0 auto', marginTop: '20px' }}>
         <Card.Body>
@@ -51,7 +53,11 @@ export default function ForgotPassword() {
         Need an account? <Link to="/register">Sign Up</Link>
       </div>
     </>
-  )
+  );
+
+  
+  return(<Header childComp={forgotPassProp}/>);
+  
 }
 
 

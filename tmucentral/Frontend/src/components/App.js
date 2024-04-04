@@ -18,6 +18,9 @@ import MyAdDisplayCard from './MyAdDisplayCard';
 import Footer from './Footer';
 import SearchResult from './SearchResult';
 import AdminPrivateRoute from './AdminPrivateRoute';
+import AdPage from './AdPage';
+import Chat from './Chat';
+
   async function handleFormSubmit(path, data, msg) { 
     const PORT = process.env.PORT || 3005;
     const url = `http://localhost:${PORT}/api/database/${path}`;
@@ -55,6 +58,7 @@ function App() {
   <Route path='/postad' element={
       <PostAd onFormSubmit={handleFormSubmit}/> 
   } />  
+   <Route path='/chat' element={<Chat />} />
   
   <Route element={<PrivateRoute />}>
             <Route path="/" element={
@@ -86,6 +90,9 @@ function App() {
      <Route element={<AdminPrivateRoute />}>
             <Route path="/admin" element={<AdminDashboard/>} />
      </Route>
+
+     <Route path="/ad/:adId" element={<AdPage />} />
+
   </Routes>
   </AuthProvider>  
 </BrowserRouter>

@@ -63,6 +63,24 @@ exports.getUserID = async(req, res) => {
     }
 };
 
+// Return user based on tmu email
+exports.getUserEmail= async(req, res) => {  
+    try{
+        const userEmail = req.params.email;
+        const result = await model.User.find({email: userEmail});
+        // Check to see if user with specified id exists in DB
+        if(!result) {
+            res.status(404).send({'error': `No user found with email ${userEmail}`});
+        }
+        else{
+            res.status(200).send(result);
+        }
+    }
+    catch(err) {
+        res.status(500).send({'error': err.message});
+    }
+};
+
 // Update a user based on their ide, completely, in DB
 exports.putUserID = async(req, res) => {  
     try{

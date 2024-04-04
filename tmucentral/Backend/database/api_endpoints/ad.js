@@ -104,6 +104,19 @@ exports.searchAds = async(req, res) => {
     }
 };
 
+exports.getAdById = async (req, res) => {
+    try {
+        const ad = await model.Ad.findById(req.params.id);
+        if (!ad) {
+            return res.status(404).send({'error': 'Ad not found'});
+        }
+        res.status(200).send(ad);
+    } catch (err) {
+        res.status(500).send({'error': err.message});
+    }
+};
+
+
 // Retrieve all advertisements based on a series of tags
 // sample endpoint: '/api/ads/tags/tag1,tag2,...,tagn
 exports.getAdTags = async(req, res) => {

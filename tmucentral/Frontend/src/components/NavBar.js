@@ -74,7 +74,7 @@ const [toPrice, setToPrice] = useState('');
             />
 
             <Button variant="success" className="ms-2" type="submit" style={{ marginRight: '10px' }}>Search</Button>
-
+            {/*
             <Dropdown>
               <Dropdown.Toggle variant="outline-light" id="dropdown-basic" title={category ? category.replace(/([A-Z])/g, ' $1').trim() : "Select a category"} ref={categoryRef}>
               {category ? category.replace(/([A-Z])/g, ' $1').trim() : "Category"}
@@ -86,16 +86,20 @@ const [toPrice, setToPrice] = useState('');
                 <Dropdown.Item onClick={() => handleCategorySelect('Items Wanted')}>Items Wanted</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
+            */}
+            <Button variant="outline-light" className="ms-2" onClick={toggleLocationDropdowns} style={{ marginRight: '15px' }}>
+              Location
+            </Button>
+          </Form>
+            
+            {/*
             
 
 <Button variant="outline-light" className="ms-2" onClick={togglePriceDropdown} >
               Price
             </Button>
 
-<Button variant="outline-light" className="ms-2" onClick={toggleLocationDropdowns} style={{ marginRight: '15px' }}>
-              Location
-            </Button>
-          </Form>
+
 
           {priceDropdown && (
             <div className="position-relative bg-white p-3" style={{ zIndex: 1000, marginRight: '25px' }}>
@@ -109,7 +113,8 @@ const [toPrice, setToPrice] = useState('');
               </Button>
             </div>
           )}
-
+          */}
+      
           {LocationDropdowns && (
             <div className="position-relative bg-white p-3" style={{ zIndex: 1000 }}>
               <h6>Location</h6>

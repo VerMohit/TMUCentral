@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom" 
+
 export default function Register({onFormSubmit}) {
   const emailRef = useRef()
   const passwordRef = useRef()
@@ -15,8 +16,20 @@ export default function Register({onFormSubmit}) {
   async function handleSubmit(e) {
     e.preventDefault()
 
+    console.log(emailRef);
+    console.log(emailRef.value);
+
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match")
+    }
+
+    if(!emailRef.current.value.includes('@torontomu.ca')) {
+      
+      return setError("Invalid email entered")
+    }
+
+    if(passwordRef.current.value.length < 8) {
+      return setError("Password must be at least 8 characters long")
     }
 
     try {
@@ -53,14 +66,17 @@ export default function Register({onFormSubmit}) {
             <Form.Group id="email" className="mb-3">
               <Form.Label style={{ fontWeight: 'bold' }}>Email</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
+              <Form.Text muted>@torontomu.ca email needed!</Form.Text>
             </Form.Group>
             <Form.Group id="password" className="mb-3">
               <Form.Label style={{ fontWeight: 'bold' }}>Password</Form.Label>
               <Form.Control type="password" ref={passwordRef} required />
+              <Form.Text muted>Minimum of 8 characters needed!</Form.Text>
             </Form.Group>
             <Form.Group id="password-confirm" className="mb-3">
               <Form.Label style={{ fontWeight: 'bold' }}>Password Confirmation</Form.Label>
               <Form.Control type="password" ref={passwordConfirmRef} required />
+              <Form.Text muted>Minimum of 8 characters needed!</Form.Text>
             </Form.Group>
             <Button disabled={loading} className="w-100" type="submit">
               Sign Up

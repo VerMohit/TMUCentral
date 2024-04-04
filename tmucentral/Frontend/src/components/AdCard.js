@@ -9,7 +9,8 @@ function AdCard({ price, title, description, image, postDate, location }) {
   postDate = date;
 
   return (
-    <Card className="text-center" style={{paddingtTop: '200px'}}>
+    <div style={{paddingTop:'2rem'}}>
+    <Card className="text-center">
       <Card.Img
         variant="top"
         src={image || defaultImage}
@@ -23,6 +24,7 @@ function AdCard({ price, title, description, image, postDate, location }) {
         <Card.Text>Location: {location}</Card.Text>
       </Card.Body>
     </Card>
+    </div>
   );
 }
 

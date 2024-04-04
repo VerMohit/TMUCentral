@@ -206,6 +206,7 @@ const PostAd = ({ onFormSubmit }) => {
         </Form>
       </Card.Body>
     </Card>
+    </>
   );
 };
 

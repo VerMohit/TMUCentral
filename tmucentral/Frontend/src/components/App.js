@@ -58,7 +58,13 @@ function App() {
   <Route path='/postad' element={
       <PostAd onFormSubmit={handleFormSubmit}/> 
   } />  
-   <Route path='/chat' element={<Chat />} />
+   <Route path='/chat' element={
+      <>
+    <NavBar></NavBar> <br></br>
+    <Chat />
+    </>
+    } />
+
   
   <Route element={<PrivateRoute />}>
             <Route path="/" element={
@@ -90,8 +96,14 @@ function App() {
      <Route element={<AdminPrivateRoute />}>
             <Route path="/admin" element={<AdminDashboard/>} />
      </Route>
-
-     <Route path="/ad/:adId" element={<AdPage />} />
+     
+     <Route element={<PrivateRoute />}>
+     <Route path="/ad/:adId" element={
+        <>
+        <NavBar /> <br></br>
+        <AdPage />
+        </>} />
+      </Route>
 
   </Routes>
   </AuthProvider>  

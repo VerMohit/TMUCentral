@@ -8,30 +8,19 @@ const User = model('User', new Schema({
 }));
 
 const Ad = model('Ad', new Schema({
-    //user: {type: ObjectId, required: true},
     postDate: {type: Date, required: true},
     title: {type: String, required: true},
     description: {type: String, required: false},
     price: {type: Number, required: false},
-    //quantity: {type: Number, required: true},
     location: {type: String, required: true},
     sold: {type: Boolean, required: false},
     image: {type: String, required: false},
-    email: {type: String, required: true}, // set to true
+    email: {type: String, required: true},
     category: {type: [
         "itemWanted", 
         "itemForSale", 
         "academicService"
     ], required: true}
-    //tags: [{tag: String}]  
 }));
 
-const Review = model('Review', new Schema({
-    user: {type: ObjectId, required: true},
-    Post: {type: ObjectId, required: true},
-    reviewDate: {type: Date, required: true},
-    description: {type: String, required: true}
-}));
-
-
-module.exports = {User, Ad, Review}
+module.exports = {User, Ad}

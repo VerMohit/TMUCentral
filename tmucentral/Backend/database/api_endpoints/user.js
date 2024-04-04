@@ -81,24 +81,6 @@ exports.getUserEmail= async(req, res) => {
     }
 };
 
-// Update a user based on their ide, completely, in DB
-exports.putUserID = async(req, res) => {  
-    try{
-        // Find the object in DB and replace it. the new args is a flag returning the changed data
-        const result = await model.User.findOneAndReplace(
-            {_id: req.params.id}, 
-            req.body, 
-            {new: true}
-        );  
-        console.log(result);
-        res.status(200).send({result});
-    }
-    catch(err) {
-        res.status(500).send({'error': err.message});
-    }
-};
-
-
 // Update specific properties of user instead of replacing entire entry
 exports.patchUser = async(req, res) => {
     try{

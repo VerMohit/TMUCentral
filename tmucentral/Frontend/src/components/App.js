@@ -1,8 +1,6 @@
 
 import { BrowserRouter, Link, Routes, Route } from 'react-router-dom';
 import Register from './Register';
-import AdCard from './AdCard';
-import { Container } from 'react-bootstrap';
 import AdDisplayCard from './AdDisplayCard';
 import NavBar from './NavBar';
 import { DEFAULT_MIN_BREAKPOINT } from 'react-bootstrap/esm/ThemeProvider';
@@ -12,8 +10,6 @@ import Login from './Login';
 import AdminDashboard from './AdminDashboard';
 import PrivateRoute from './PrivateRoute';
 import { AuthProvider } from "../contexts/AuthContext"
-import Dashboard from './Dashboard';
-import { useState } from 'react';
 import ForgotPassword from './ForgotPassword';
 import MyAdDisplayCard from './MyAdDisplayCard';
 import Footer from './Footer';
@@ -80,7 +76,6 @@ function App() {
               </div>
             } />
           </Route>
-          {/* <Route path="/searchresults/:title/:location/:category/:fromPrice/:toPrice" */}
           <Route path="/searchresults/:title" element={
             <SearchResult />
           } />
@@ -93,9 +88,6 @@ function App() {
             <Login onFormSubmit={handleFormSubmit} />
           } />
           <Route path="/myads" element={<MyAdDisplayCard />} />
-          <Route element={<PrivateRoute />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Route>
 
           <Route element={<AdminPrivateRoute />}>
             <Route path="/admin" element={<AdminDashboard />} />
@@ -116,4 +108,3 @@ function App() {
 }
 
 export default App;
-

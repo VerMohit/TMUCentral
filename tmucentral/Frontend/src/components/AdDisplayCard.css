@@ -1,6 +1,6 @@
 .ad-grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
-  gap: 10px 20px; /* The first value is for the row gap (vertical), and the second is for the column gap (horizontal) */
+  gap: 10px 20px; 
   padding: 20px; 
 }

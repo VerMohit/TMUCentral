@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import Talk from 'talkjs';
 import { Session, Inbox } from '@talkjs/react';
-import { useAuth } from "../contexts/AuthContext" // access to auth API
+import { useAuth } from "../contexts/AuthContext" 
 
 function Chat() {
   const PORT = process.env.PORT || 3005;
@@ -29,26 +29,20 @@ function Chat() {
       new Talk.User({
         id: email,
         name: email.split('@')[0],
-        email: email,   // for email notification when person is offline
-        // photoUrl: 'https://talkjs.com/new-web/avatar-7.jpg',
-        // photoUrl: 'https://talkjs.com/images/avatar-1.jpg',
-        // welcomeMessage: 'Hi!',
+        email: email,   
         role: 'buyer',
       }),
     []
   );
 
   const syncConversation = useCallback((session) => {
-    // JavaScript SDK code here
     const roomID = email + '-' + sellerEmail.sellerEmail;
     const conversation = session.getOrCreateConversation(roomID);
 
     const other = new Talk.User({
       id: sellerEmail,
       name: sellerEmail.split('@')[0],
-      email: sellerEmail,     // for email notification when person is offline
-      // photoUrl: 'undefined',
-      // welcomeMessage: 'Hey, how can I help?',
+      email: sellerEmail,     
       role: 'seller',
     });
     conversation.setParticipant(session.me);

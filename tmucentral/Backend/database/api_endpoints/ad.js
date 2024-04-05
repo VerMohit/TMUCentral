@@ -46,23 +46,6 @@ exports.patchAds = async(req, res) => {
     }
 };
 
-// Find ad by title
-// exports.searchAd = async(req, res) => {
-//     try{
-//         console.log(req.body.title);
-//         const result = await model.Ad.find({title: req.body.title});
-//         if(result == 0){
-//             res.status(404).send({'error': 'No results returned'});
-//         }
-//         else {
-//             res.status(200).send({'Ad': result});
-//         }
-//     }
-//     catch(err){
-//         res.status(500).send({'error': err.message});
-//     }
-// };
-
 exports.searchAd = async(req, res) => {
     try{
         console.log(req.body.email);
@@ -99,10 +82,6 @@ exports.searchAds = async(req, res) => {
 
             query.title = { "$regex": titleResult.join("|"), "$options": "i" };
         }
-        // if (location!=="null") query.location = location;
-        // if (category!=="null") query.category = category;
-        // if (fromPrice!=="-1") query.price = { $gte: parseFloat(fromPrice) };
-        // if (toPrice!=="-1") query.price = { ...query.price, $lte: parseFloat(toPrice) };
 
         console.log(req.body.email);
         const result = await model.Ad.find(query);

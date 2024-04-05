@@ -12,7 +12,6 @@ const CategorySidebar = ({ categories, onSelectCategory, onSelectPriceRange, onS
         marginBottom: '20px',
     };
 
-    // You can define more styles if needed
     const subHeaderStyle = {
         marginTop: '40px',
         color: '#555',

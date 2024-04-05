@@ -10,7 +10,7 @@ const NavPostAd = () => {
 
   const navbarStyle = {
     backgroundColor: '#004c9b',
-    paddingInline: '2rem' // Adding inline padding
+    paddingInline: '2rem' 
   };
 
   async function handleLogout() {

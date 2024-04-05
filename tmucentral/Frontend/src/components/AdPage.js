@@ -71,7 +71,6 @@ const AdPage = () => {
                 <ListGroup.Item>
                   <p>Condition: {ad.condition || "Not specified"}</p>
                 </ListGroup.Item>
-                {/* Include more details as required */}
                 <ListGroup.Item>
                   <p>Posted on: {new Date(ad.postDate).toLocaleDateString()}</p>
                 </ListGroup.Item>

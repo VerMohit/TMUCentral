@@ -7,5 +7,3 @@ export default function PrivateRoute() {
   const { currentUser } = useAuth();
   return currentUser && currentUser.email === "admin@torontomu.ca" ? <Outlet /> : <Navigate to="/" replace />;
 }
-
-

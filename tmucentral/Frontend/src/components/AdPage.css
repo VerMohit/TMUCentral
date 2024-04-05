@@ -58,7 +58,6 @@
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
-/* Media queries for responsiveness */
 @media (max-width: 768px) {
     .ad-page-container {
         margin: 10px;

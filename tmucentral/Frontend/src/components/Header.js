@@ -5,8 +5,8 @@ export default function Header(props) {
 
   const navbarStyle = {
     backgroundColor: '#004c9b',
-    marginBottom: '5rem', // Adding bottom margin
-    paddingInline: '2rem' // Adding inline padding
+    marginBottom: '5rem', 
+    paddingInline: '2rem' 
   };
 
   return (

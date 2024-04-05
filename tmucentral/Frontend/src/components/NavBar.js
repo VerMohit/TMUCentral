@@ -30,17 +30,13 @@ const NavBar = ({ onFormSubmit }) => {
       lowercaseLocation = lowercaseLocation.substring(1);
       locationF = FirstUppercaseLocation + lowercaseLocation;
     }
-    // const categoryF = category ? category : "null";
     const titleF = title ? title : "null";
-    // const fromPriceF = fromPrice ? fromPrice : -1;
-    // const toPriceF = toPrice ? toPrice : -1;
-    // navigate(`/searchresults/${titleF}/${locationF}/${categoryF}/${fromPriceF}/${toPriceF}`);
     navigate(`/searchresults/${titleF}`);
   }
 
   const navbarStyle = {
     backgroundColor: '#004c9b',
-    paddingInline: '2rem' // Adding inline padding
+    paddingInline: '2rem' 
   };
 
   const handleCategorySelect = (cat) => {

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Container, Row, Col, ListGroup, Card } from 'react-bootstrap';
-import AdCard from './AdCard';
-import NavBar from './NavBar';
+import React, { useEffect, useState } from "react";
+import { Button, Container, Row, Col, ListGroup, Card } from "react-bootstrap";
+import AdCard from "./AdCard";
+import NavBar from "./NavBar";
 import { Link, useNavigate } from "react-router-dom";
 export default function AdminDashboard() {
   const [users, setUsers] = useState([]);
-  const [activeMenu, setActiveMenu] = useState('');
+  const [activeMenu, setActiveMenu] = useState("");
   const [ads, setAds] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
@@ -18,15 +18,15 @@ export default function AdminDashboard() {
         }
         return resp.json();
       })
-      .then(ads => setAds(ads.Ads))
-      .catch(err => console.error(err));
+      .then((ads) => setAds(ads.Ads))
+      .catch((err) => console.error(err));
   }, []);
 
   useEffect(() => {
     const PORT = process.env.PORT || 3005;
     const url = `http://localhost:${PORT}/api/database/getUsers`;
 
-    if (activeMenu === 'manage-users') {
+    if (activeMenu === "manage-users") {
       fetch(url)
         .then((resp) => {
           if (!resp.ok) {
@@ -34,8 +34,8 @@ export default function AdminDashboard() {
           }
           return resp.json();
         })
-        .then(data => setUsers(data.Review))
-        .catch(err => console.error(err));
+        .then((data) => setUsers(data.Review))
+        .catch((err) => console.error(err));
     }
   }, [activeMenu]);
 
@@ -43,14 +43,13 @@ export default function AdminDashboard() {
     setActiveMenu(menuKey);
   };
 
-
   async function handleDelete(type, itemId) {
     const PORT = process.env.PORT || 3005;
     const url = `http://localhost:${PORT}/api/database/${type}/${itemId}`;
     try {
       const response = await fetch(url, {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" }
+        headers: { "Content-Type": "application/json" },
       });
 
       if (!response.ok) {
@@ -59,13 +58,14 @@ export default function AdminDashboard() {
 
       const responseData = await response.json();
       console.log("Data Submitted: ", responseData);
-      setAds(currentAds => currentAds.filter(ad => ad._id !== itemId));
-      setUsers(currentUsers => currentUsers.filter(user => user._id !== itemId));
-
+      setAds((currentAds) => currentAds.filter((ad) => ad._id !== itemId));
+      setUsers((currentUsers) =>
+        currentUsers.filter((user) => user._id !== itemId)
+      );
     } catch (err) {
       console.error("Error deleting the item: ", err);
     }
-  };
+  }
 
   return (
     <div>
@@ -76,13 +76,31 @@ export default function AdminDashboard() {
           <Col md={3} className="mb-3">
             <h3>Admin Menu</h3>
             <ListGroup>
-              <ListGroup.Item action href="#manage-ads" onClick={() => handleMenuSelect('manage-ads')}>Manage Ads</ListGroup.Item>
-              <ListGroup.Item action href="#manage-users" onClick={() => handleMenuSelect('manage-users')}>Manage Users</ListGroup.Item>
-              <ListGroup.Item action href="#site-content" onClick={() => navigate('/')}>Site Content</ListGroup.Item>
+              <ListGroup.Item
+                action
+                href="#manage-ads"
+                onClick={() => handleMenuSelect("manage-ads")}
+              >
+                Manage Ads
+              </ListGroup.Item>
+              <ListGroup.Item
+                action
+                href="#manage-users"
+                onClick={() => handleMenuSelect("manage-users")}
+              >
+                Manage Users
+              </ListGroup.Item>
+              <ListGroup.Item
+                action
+                href="#site-content"
+                onClick={() => navigate("/")}
+              >
+                Site Content
+              </ListGroup.Item>
             </ListGroup>
           </Col>
           <Col md={9}>
-            {activeMenu === 'manage-ads' && (
+            {activeMenu === "manage-ads" && (
               <Card>
                 <Card.Body>
                   <Card.Title>Manage Ads</Card.Title>
@@ -97,16 +115,20 @@ export default function AdminDashboard() {
                           postDate={ad.postDate}
                           location={ad.location}
                         />
-                        <Button variant="danger" onClick={() => handleDelete("deleteAd", ad._id)}>Delete</Button>
+                        <Button
+                          variant="danger"
+                          onClick={() => handleDelete("deleteAd", ad._id)}
+                        >
+                          Delete
+                        </Button>
                       </div>
                     ))}
                   </ListGroup>
-
                 </Card.Body>
               </Card>
             )}
 
-            {activeMenu === 'manage-users' && (
+            {activeMenu === "manage-users" && (
               <Card>
                 <Card.Body>
                   <Card.Title>Manage Users</Card.Title>
@@ -116,11 +138,15 @@ export default function AdminDashboard() {
                         <strong>Name:</strong> {user.name} <br />
                         <strong>Email:</strong> {user.email} <br />
                         <strong>Id:</strong> {user._id} <br />
-                        <Button variant="danger" onClick={() => handleDelete("deleteUser", user._id)}>Delete</Button>
+                        <Button
+                          variant="danger"
+                          onClick={() => handleDelete("deleteUser", user._id)}
+                        >
+                          Delete
+                        </Button>
                       </ListGroup.Item>
                     ))}
                   </ListGroup>
-
                 </Card.Body>
               </Card>
             )}

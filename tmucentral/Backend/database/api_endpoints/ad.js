@@ -1,4 +1,6 @@
 const model = require('../model');
+
+// Used for the searching ad query
 const { removeStopwords } = require('stopword');
 
 // Retreive all advertisements
@@ -97,6 +99,7 @@ exports.searchAds = async(req, res) => {
     }
 };
 
+// Search an ad base on their id
 exports.getAdById = async (req, res) => {
     try {
         const ad = await model.Ad.findById(req.params.id);

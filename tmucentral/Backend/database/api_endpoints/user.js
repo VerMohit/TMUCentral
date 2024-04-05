@@ -28,6 +28,7 @@ exports.postUser = async(req, res) => {
     }
 };
 
+// Search user by attributes
 exports.searchUser = async(req, res) => {
     try{
         console.log(req.body);

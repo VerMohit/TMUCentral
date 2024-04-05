@@ -18,6 +18,7 @@ const AdPage = () => {
 
   const navigate = useNavigate();
 
+  // Fetching ad data from the server
   useEffect(() => {
     const PORT = process.env.PORT || 3005;
     const url = `http://localhost:${PORT}/api/database/getAdById/${adId}`;
@@ -30,11 +31,11 @@ const AdPage = () => {
   if (!ad) {
     return <div>Loading...</div>;
   }
-
+  // Function to handle contact seller button click
   const handleContactSeller = () => {
     navigate("/chat", { state: { sellerEmail: ad.email } });
   };
-
+  // Displaying ad details on the page
   return (
     <Container className="ad-page-container my-5">
       <Row className="justify-content-md-center">

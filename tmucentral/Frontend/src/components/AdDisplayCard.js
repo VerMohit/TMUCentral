@@ -30,15 +30,15 @@ const AdDisplayCard = ({ onFormSubmit }) => {
       .then((ads) => setAds(ads.Ads))
       .catch((err) => console.error(err));
   }, []);
-
+  // Function to handle category selection
   const handleSelectCategory = (category) => {
     setSelectedCategory(category);
   };
-
+ // Function to handle price range selection
   const onSelectPriceRange = (priceRange) => {
     setSelectedPriceRange(priceRange);
   };
-
+  // Function to handle location selection
   const onSelectLocation = (selectedLocation) => {
     setSelectedLocation(selectedLocation);
   };
@@ -46,8 +46,6 @@ const AdDisplayCard = ({ onFormSubmit }) => {
   // Helper function to parse price range and filter ads
   const filterAdsByPrice = (ads, priceRange) => {
     if (!priceRange) return ads; // No filter applied
-    // print all category inside ads
-    console.log(ads);
 
     const [minPrice, maxPrice] = priceRange.split("-").map(Number);
     return ads.filter((ad) => {
@@ -56,14 +54,14 @@ const AdDisplayCard = ({ onFormSubmit }) => {
       return price >= minPrice && (maxPrice ? price <= maxPrice : true);
     });
   };
-
+  // Helper function to filter ads by category
   const filterAdsByCategory = (ads, selectedCategoryName) => {
     if (!selectedCategoryName || selectedCategoryName === "All") return ads;
     return ads.filter((ad) => {
       return ad.category.includes(selectedCategoryName);
     });
   };
-
+  // Helper function to filter ads by location
   const filterAdsByLocation = (ads, selectedLocation) => {
     if (!selectedLocation) return ads;
     else {
@@ -78,7 +76,7 @@ const AdDisplayCard = ({ onFormSubmit }) => {
       return ad.location.includes(selectedLocation);
     });
   };
-
+ // Filtering ads based on selected category, price range, and location
   const filteredAds = filterAdsByLocation(
     filterAdsByCategory(
       filterAdsByPrice(ads, selectedPriceRange),
@@ -86,7 +84,7 @@ const AdDisplayCard = ({ onFormSubmit }) => {
     ),
     selectedLocation
   );
-
+  // Displaying ads on the page if they are loaded
   if (!ads) {
     return <div>Loading...</div>;
   }

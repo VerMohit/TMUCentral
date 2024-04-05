@@ -17,13 +17,6 @@ function Chat() {
     sellerEmail = email;
   }
 
-
-  console.log("Email: ", email);
-  console.log(sellerEmail);
-
-  console.log("Email: ", email);
-  console.log("Seller Email: ", sellerEmail);
-
   const syncUser = useCallback(
     () =>
       new Talk.User({
@@ -34,7 +27,6 @@ function Chat() {
       }),
     []
   );
-
   const syncConversation = useCallback((session) => {
     const roomID = email + '-' + sellerEmail.sellerEmail;
     const conversation = session.getOrCreateConversation(roomID);

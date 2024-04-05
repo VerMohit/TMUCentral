@@ -22,7 +22,6 @@ const CategorySidebar = ({ categories, onSelectCategory, onSelectPriceRange, onS
         onSelectLocation(location);
     }
 
-
     return (
         
         <>

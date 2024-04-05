@@ -13,7 +13,8 @@ app.use(cors());
 if(process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
-const PORT = process.env.PORT;
+// const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 const CONNECTION = process.env.CONNECTION;
 
 app.use('/api/database', router);

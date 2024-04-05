@@ -1,6 +1,7 @@
 {
   "name": "tmucentral",
   "version": "0.1.0",
+  "description": "TMUCENTRAL is an advertisement web interface for providing services or products provided by and tailored for TMU students",
   "private": true,
   "dependencies": {
     "@talkjs/react": "^0.1.7",

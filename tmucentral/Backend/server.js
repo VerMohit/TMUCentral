@@ -7,7 +7,7 @@ const mongoose = require('mongoose');  // Connect Mongoose to MongoDB
 const router = require('./database/route');  // Get all routes for database API
 
 app.use(express.json()); // Middleware to parse JSON requests
-app.use(cors()); 
+// app.use(cors()); 
 
 
 
@@ -15,7 +15,8 @@ app.use(cors());
 const corsOptions = {
     origin: "https://tmucentral-frontend.onrender.com", // frontend URI (ReactJS)
 }
-app.usecors(corsOptions); 
+
+app.use(cors(corsOptions));
 
 // If app not in production mode, then use the enviornment vars from the .env file
 if(process.env.NODE_ENV !== 'production') {

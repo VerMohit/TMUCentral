@@ -9,6 +9,14 @@ const router = require('./database/route');  // Get all routes for database API
 app.use(express.json()); // Middleware to parse JSON requests
 app.use(cors()); 
 
+
+
+//middleware
+const corsOptions = {
+    origin: "https://tmucentral-frontend.onrender.com", // frontend URI (ReactJS)
+}
+app.usecors(corsOptions); 
+
 // If app not in production mode, then use the enviornment vars from the .env file
 if(process.env.NODE_ENV !== 'production') {
     require('dotenv').config();

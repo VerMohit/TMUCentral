@@ -3,7 +3,9 @@ import { Container, Navbar, Nav, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from "../contexts/AuthContext";
 
+// Function for the navbar used in Post ad
 const NavPostAd = () => {
+  // get the email of the current user
   const { currentUser, logout } = useAuth();
   const [error, setError] = useState("")
   const navigate = useNavigate()
@@ -17,6 +19,7 @@ const NavPostAd = () => {
     setError("")
 
     try {
+      // logout when logout button is pressed and then go to login page next
       await logout()
       navigate("/login")
     } catch {
@@ -24,6 +27,7 @@ const NavPostAd = () => {
     }
   }
 
+  // Display the navigation bar and its buttons
   return (
     <Navbar style={navbarStyle} variant="dark" expand="lg" className="shadow-sm">
       <Container fluid>

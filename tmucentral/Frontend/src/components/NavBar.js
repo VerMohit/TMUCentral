@@ -3,7 +3,9 @@ import { Container, Navbar, Nav, Form, FormControl, Button, Dropdown, InputGroup
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from "../contexts/AuthContext";
 
+// Function for the Navbar Usage
 const NavBar = ({ onFormSubmit }) => {
+  // Get the references for the data
   const titleRef = useRef();
   const [priceDropdown, setPriceDropdown] = useState(false);
   const [LocationDropdowns, setLocationDropdowns] = useState(false);
@@ -25,11 +27,13 @@ const NavBar = ({ onFormSubmit }) => {
     console.log("Test button");
     let locationF = "null";
     if (location) {
+      // Make sure the location is formatting correctly no matter what the user enters 
       let lowercaseLocation = location.toLowerCase();
       let FirstUppercaseLocation = lowercaseLocation.substring(0, 1).toUpperCase();
       lowercaseLocation = lowercaseLocation.substring(1);
       locationF = FirstUppercaseLocation + lowercaseLocation;
     }
+    // When a user searches in the search bar
     const titleF = title ? title : "null";
     navigate(`/searchresults/${titleF}`);
   }
@@ -45,7 +49,7 @@ const NavBar = ({ onFormSubmit }) => {
 
   async function handleLogout() {
     setError("")
-
+    // logout when the logout button is pressed and then go to the login page next
     try {
       await logout()
       navigate("/login")
@@ -54,6 +58,7 @@ const NavBar = ({ onFormSubmit }) => {
     }
   }
 
+  // display the NAvbar with all its buttons and features
   return (
     <Navbar style={navbarStyle} variant="dark" expand="lg" className="shadow-sm">
       <Container fluid>

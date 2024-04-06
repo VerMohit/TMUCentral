@@ -4,7 +4,7 @@ import PriceRangeFilter from "./PriceRangeFilter";
 import { useRef, useState, useEffect } from 'react';
 import { Container, Navbar, Nav, Form, FormControl, Button, Dropdown, InputGroup, Col } from 'react-bootstrap';
 
-
+// Defining the attributes for the category sidebar and its properties
 const CategorySidebar = ({ categories, onSelectCategory, onSelectPriceRange, onSelectLocation }) => {
     const [location, setLocation] = useState('');
     const headerStyle = {
@@ -22,6 +22,7 @@ const CategorySidebar = ({ categories, onSelectCategory, onSelectPriceRange, onS
         onSelectLocation(location);
     }
 
+    // Displaying the category on the page
     return (
         
         <>

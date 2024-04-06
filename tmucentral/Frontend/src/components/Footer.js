@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Container, Navbar, Nav, Form, FormControl, Button, Dropdown, InputGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+// To add a footer if needed
 const Footer = ({ onFormSubmit }) => {
   const titleRef = useRef();
   const [priceDropdown, setPriceDropdown] = useState(false);
@@ -18,12 +19,12 @@ const Footer = ({ onFormSubmit }) => {
       alert("No Results");
     }
   }
-
+  // styling the footer
   const navbarStyle = {
     backgroundColor: '#004c9b',
   };
 
-
+  // display the footer if required
   return (
     <Navbar style={navbarStyle} variant="dark" expand="lg" className="shadow-sm">
       <Container fluid>

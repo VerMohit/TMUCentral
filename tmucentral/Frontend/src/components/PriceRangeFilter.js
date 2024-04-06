@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Col } from 'react-bootstrap';
 
+// define price ranges
 const priceRanges = [
     { label: "Under 50", value: "0-50" },
     { label: "50-100", value: "50-100" },
@@ -10,17 +11,19 @@ const priceRanges = [
     { label: "Over 1000", value: "1000-10000" }
 ];
 
+// Function to select posts based on the price range
 const PriceRangeFilter = ({ onSelectPriceRange }) => {
     const [customMin, setCustomMin] = useState('');
     const [customMax, setCustomMax] = useState('');
 
+    // When the user inputs a custom price range
     const handleCustomPriceSubmit = (e) => {
         e.preventDefault();
         onSelectPriceRange(`${customMin}-${customMax}`);
         setCustomMax('');
         setCustomMin('');
     }
-
+    // Display the Price range and custom price(in the category sidebar)
     return (
         <Form>
             {priceRanges.map((range) => (

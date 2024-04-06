@@ -4,7 +4,9 @@ import NavPostAd from './NavPostAd';
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
 
+// To handle posting an ad
 const PostAd = ({ onFormSubmit }) => {
+  // get the refrences for post data
   const { currentUser, logout } = useAuth();
   const titleRef = useRef();
   const descriptionRef = useRef();
@@ -22,21 +24,24 @@ const PostAd = ({ onFormSubmit }) => {
     setCategory(cat);
   };
 
+  // When the user presses the submit button
   async function handleAdSubmit(e) {
     e.preventDefault();
     try {
       let imageBase64 = null;
-
+      // processing the image into base 64
       if (image) {
         const reader = new FileReader();
         reader.onloadend = () => {
           imageBase64 = reader.result;
 
-          if (calculateBase64Size(imageBase64) > 130) {
+          if (calculateBase64Size(imageBase64) > 130) {  // If the image is more than (130/2 + 6) = 71kb
+            // resize the image to be less than 71 kb
             resizeImage(imageBase64, function (resizedImage) {
               submitAd(resizedImage);
             });
           } else {
+            // if it is less than 71kb then submit the base 64 directly
             submitAd(imageBase64);
           }
         };
@@ -52,6 +57,7 @@ const PostAd = ({ onFormSubmit }) => {
 
   async function submitAd(imageBase64) {
     let inputLocation = locationRef.current.value;
+    // Make sure the location is formatting correctly no matter what the user enters
     let lowercaseLocation = inputLocation.toLowerCase();
     let FirstUppercaseLocation = lowercaseLocation.substring(0, 1).toUpperCase();
     lowercaseLocation = lowercaseLocation.substring(1);
@@ -67,11 +73,13 @@ const PostAd = ({ onFormSubmit }) => {
       category: category,
       email: email,
     };
+    // To send the ad data to the server
     const msg = "Advertisement submitted successfully!";
     onFormSubmit('/postAds', newAd, msg);
     navigate("/myads")
   }
 
+  // Function to resize the image 
   function resizeImage(imageData, callback) {
     const img = new Image();
     img.src = imageData;
@@ -87,13 +95,14 @@ const PostAd = ({ onFormSubmit }) => {
       let quality = 0.9;
       let calc = calculateBase64Size(imageData);
 
-      while (calc > targetSize) {
+      while (calc > targetSize) { // while the image is more than (130/2 + 6) = 71kb
         width *= 0.9;
         height = width / aspectRatio;
         canvas.width = width;
         canvas.height = height;
         ctx.clearRect(0, 0, width, height);
         ctx.drawImage(img, 0, 0, width, height);
+        // reduce quality by 10% each iteration
         imageData = canvas.toDataURL('image/jpeg', quality);
         calc = calculateBase64Size(imageData);
       }
@@ -101,6 +110,7 @@ const PostAd = ({ onFormSubmit }) => {
     };
   }
 
+  // Function to calculate the size in kb of a base 64 string
   function calculateBase64Size(base64String) {
     const base64WithoutPrefix = base64String.replace(/^data:image\/[a-z]+;base64,/, '');
     const sizeInBytes = Math.ceil((base64WithoutPrefix.length * 4) / 3);
@@ -112,6 +122,7 @@ const PostAd = ({ onFormSubmit }) => {
     navigate("/");
   }
 
+  // Display the post ad menu
   return (
     <>
       <NavPostAd></NavPostAd>

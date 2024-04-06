@@ -18,7 +18,9 @@ import AdminPrivateRoute from './AdminPrivateRoute';
 import AdPage from './AdPage';
 import Chat from './Chat';
 
+// Function to handle submits from pages
 async function handleFormSubmit(path, data, msg, inputMethod = "POST") {
+  // access the database based on the specific path/page
   const PORT = process.env.PORT || 3005;
   const url = `http://localhost:${PORT}/api/database/${path}`;
   try {
@@ -44,6 +46,7 @@ async function handleFormSubmit(path, data, msg, inputMethod = "POST") {
   }
 };
 
+// Function to route the pages and create their path
 function App() {
   return (
 

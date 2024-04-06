@@ -9,6 +9,7 @@ export default function AdminDashboard() {
   const [ads, setAds] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
+    // Fetching the ads from the database
     const PORT = process.env.PORT || 3005;
     const url = `http://localhost:${PORT}/api/database/getAds`;
     fetch(url)
@@ -23,6 +24,7 @@ export default function AdminDashboard() {
   }, []);
 
   useEffect(() => {
+    // Fetching the users from the database
     const PORT = process.env.PORT || 3005;
     const url = `http://localhost:${PORT}/api/database/getUsers`;
 
@@ -44,6 +46,7 @@ export default function AdminDashboard() {
   };
 
   async function handleDelete(type, itemId) {
+    // Find the specific ad in the database
     const PORT = process.env.PORT || 3005;
     const url = `http://localhost:${PORT}/api/database/${type}/${itemId}`;
     try {
@@ -55,7 +58,7 @@ export default function AdminDashboard() {
       if (!response.ok) {
         throw new Error("Network response was not okay");
       }
-
+      // send a delete query to the database
       const responseData = await response.json();
       console.log("Data Submitted: ", responseData);
       setAds((currentAds) => currentAds.filter((ad) => ad._id !== itemId));
@@ -66,7 +69,7 @@ export default function AdminDashboard() {
       console.error("Error deleting the item: ", err);
     }
   }
-
+  // Displaying the menu on the page
   return (
     <div>
       <NavBar></NavBar>

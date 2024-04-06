@@ -4,7 +4,10 @@ import { useAuth } from "../contexts/AuthContext"
 import { Link } from "react-router-dom"
 import Header from "./Header"
 
+// Function to change the password for the user
 export default function ForgotPassword() {
+
+  // Get the references for the data
   const emailRef = useRef()
   const { resetPassword } = useAuth()
   const [error, setError] = useState("")
@@ -13,7 +16,7 @@ export default function ForgotPassword() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-
+    // Reset the password using the inbox
     try {
       setMessage("")
       setError("")
@@ -27,7 +30,7 @@ export default function ForgotPassword() {
     setLoading(false)
   }
 
-
+  // Display the Forgot Password page
   const forgotPassProp = (
     <>
       <Card style={{ width: '50%', margin: '0 auto', marginTop: '20px' }}>
@@ -55,7 +58,7 @@ export default function ForgotPassword() {
     </>
   );
 
-
+  // Add a header to the page
   return (<Header childComp={forgotPassProp} />);
 
 }

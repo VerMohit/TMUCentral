@@ -18,6 +18,7 @@ const AdDisplayCard = ({ onFormSubmit }) => {
   const [selectedLocation, setSelectedLocation] = useState("");
 
   useEffect(() => {
+    // Fetching the ads from the database
     const PORT = process.env.PORT || 3005;
     const url = `http://localhost:${PORT}/api/database/getAds`;
     fetch(url)

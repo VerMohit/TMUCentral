@@ -4,7 +4,10 @@ import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "./Header";
 
+// Function to allow the user to login using their credentials
 export default function Login() {
+
+  // Get the references for the entered data
   const emailRef = useRef();
   const passwordRef = useRef();
   const { login } = useAuth();
@@ -16,6 +19,7 @@ export default function Login() {
     e.preventDefault();
 
     try {
+      // Login using the firebase API
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
@@ -27,7 +31,7 @@ export default function Login() {
   }
 
 
-
+  // Display the login page
   const loginProp = (
     <>
       <Card style={{ width: '50%', margin: '0 auto', marginTop: '20px' }}>
@@ -57,6 +61,6 @@ export default function Login() {
       </div>
     </>
   );
-
+  // Display the required Header for the login page
   return (<Header childComp={loginProp} />);
 }

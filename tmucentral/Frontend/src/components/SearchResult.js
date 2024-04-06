@@ -79,7 +79,7 @@ const SearchResult = ({ onFormSubmit }) => {
       return price >= minPrice && (maxPrice ? price <= maxPrice : true);
     });
   };
-
+  // Helper function to filter by selected category
   const filterAdsByCategory = (ads, selectedCategoryName) => {
     if (!selectedCategoryName || selectedCategoryName === "All") return ads;
     return ads.filter((ad) => {
@@ -87,6 +87,7 @@ const SearchResult = ({ onFormSubmit }) => {
     });
   };
 
+  // Helper function to filter by entered location
   const filterAdsByLocation = (ads, selectedLocation) => {
     if (!selectedLocation) return ads;
     else {
@@ -114,6 +115,7 @@ const SearchResult = ({ onFormSubmit }) => {
     return <div>Loading...</div>;
   }
 
+  // Display the Search result posts
   return (
     <div>
       <NavBar></NavBar> <br></br>

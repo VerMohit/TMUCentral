@@ -4,7 +4,9 @@ import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
 import Header from "./Header"
 
+// Function to allow the user to register
 export default function Register({ onFormSubmit }) {
+  // Get the references for the entered data
   const emailRef = useRef()
   const passwordRef = useRef()
   const nameRef = useRef();
@@ -20,21 +22,24 @@ export default function Register({ onFormSubmit }) {
     console.log(emailRef);
     console.log(emailRef.value);
 
+    // in case both passswords are not the same
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match")
     }
 
+    // the email must be @torontomu.ca
     if (!emailRef.current.value.includes('@torontomu.ca')) {
 
       return setError("Invalid email entered")
     }
 
+    // password must be strong, at least 8 characters
     if (passwordRef.current.value.length < 8) {
       return setError("Password must be at least 8 characters long")
     }
 
     try {
-
+      // define the user and then signup using firebase API
       setError("")
       setLoading(true)
       await signup(emailRef.current.value, passwordRef.current.value)
@@ -53,7 +58,7 @@ export default function Register({ onFormSubmit }) {
     setLoading(false)
   }
 
-
+  // Display the register page
   const registerProp = (<>
     <Card style={{ width: '50%', margin: '0 auto', marginTop: '20px' }}>
       <Card.Body>

@@ -1,13 +1,16 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import defaultImage from "../default.jpg";
+// To display the actual individual ad
 function AdCard({ price, title, description, image, postDate, location }) {
+  //converting price into the right format
   price = `\$${price}.00`;
-
+  // getting the date to use in the ad
   const date = postDate.substring(0, 10);
   const time = postDate.substring(11, 20);
   postDate = date;
 
+  // Displaying the individual ad details on the page
   return (
     <div style={{ paddingTop: "2rem" }}>
       <Card className="text-center">

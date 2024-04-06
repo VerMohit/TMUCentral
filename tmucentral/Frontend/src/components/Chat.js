@@ -5,6 +5,7 @@ import { Session, Inbox } from '@talkjs/react';
 import { useAuth } from "../contexts/AuthContext" 
 
 function Chat() {
+  // Get the current user's email by querying the database
   const PORT = process.env.PORT || 3005;
   const url = `http://localhost:${PORT}/api/database/getUserEmail`;
 
@@ -13,10 +14,12 @@ function Chat() {
   const location = useLocation();
   let { sellerEmail } = location.state || {};
 
+  // If there is no seller email then use the user's email
   if (!sellerEmail) {
     sellerEmail = email;
   }
 
+  // Create a new talk with the the current user
   const syncUser = useCallback(
     () =>
       new Talk.User({
@@ -27,6 +30,8 @@ function Chat() {
       }),
     []
   );
+
+  // Add the seller to the conversation as well
   const syncConversation = useCallback((session) => {
     const roomID = email + '-' + sellerEmail.sellerEmail;
     const conversation = session.getOrCreateConversation(roomID);
@@ -43,6 +48,7 @@ function Chat() {
     return conversation;
   }, []);
 
+  // Displaying the chat using the talk.js API with user and conversation above
   return (
     <Session appId="t5jYSKwc" syncUser={syncUser}>
       <Inbox

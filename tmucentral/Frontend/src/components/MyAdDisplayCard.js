@@ -6,8 +6,9 @@ import { useAuth } from "../contexts/AuthContext"
 import NavBar from './NavBar';
 import { Link, useLocation, useNavigate, createSearchParams } from 'react-router-dom';
 
-
+// Function to display the My Ads page
 const MyAdDisplayCard = () => {
+    // get the current user's email as well as the ad
     const [ads, setAds] = useState([]);
     const { currentUser, logout } = useAuth();
     const location = useLocation();
@@ -15,6 +16,7 @@ const MyAdDisplayCard = () => {
 
     useEffect(() => {
         const fetchData = async () => {
+            // search and get the ad from the backend server
             const PORT = process.env.PORT || 3005;
             const url = `http://localhost:${PORT}/api/database/searchAd`;
             const userEmail = currentUser.email
@@ -32,7 +34,7 @@ const MyAdDisplayCard = () => {
                 }
 
                 const data = await response.json();
-
+                // set the add data to the new modified data
                 if (data && data.Ad) {
                     setAds(data.Ad);
                 } else {
@@ -46,11 +48,12 @@ const MyAdDisplayCard = () => {
         fetchData();
     }, [location.state]);
 
-
+    // Function to delete the Ad
     async function handleDelete(itemId) {
         const PORT = process.env.PORT || 3005;
         const url = `http://localhost:${PORT}/api/database/deleteAd/${itemId}`;
 
+        // Confirmation for deleteing the Ad
         if (!window.confirm("Are you sure you want to delete this ad?")) return;
 
         try {
@@ -71,7 +74,7 @@ const MyAdDisplayCard = () => {
             console.error("Error deleting the item: ", err);
         }
     };
-
+    // Display the My Ads page with all the ads and options
     return (
         <div>
             <NavBar></NavBar> <br></br>

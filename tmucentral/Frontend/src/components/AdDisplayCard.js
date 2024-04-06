@@ -20,7 +20,7 @@ const AdDisplayCard = ({ onFormSubmit }) => {
   useEffect(() => {
     // Fetching the ads from the database
     const PORT = process.env.PORT || 3005;
-    const url = `http://localhost:${PORT}/api/database/getAds`;
+    const url = `https://tmucentral.onrender.com/api/database/getAds`;
     fetch(url)
       .then((resp) => {
         if (!resp.ok) {

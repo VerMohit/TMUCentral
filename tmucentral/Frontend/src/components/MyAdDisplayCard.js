@@ -18,7 +18,7 @@ const MyAdDisplayCard = () => {
         const fetchData = async () => {
             // search and get the ad from the backend server
             const PORT = process.env.PORT || 3005;
-            const url = `http://localhost:${PORT}/api/database/searchAd`;
+            const url = `https://tmucentral.onrender.com/api/database/searchAd`;
             const userEmail = currentUser.email
             try {
                 const response = await fetch(url, {
@@ -51,7 +51,7 @@ const MyAdDisplayCard = () => {
     // Function to delete the Ad
     async function handleDelete(itemId) {
         const PORT = process.env.PORT || 3005;
-        const url = `http://localhost:${PORT}/api/database/deleteAd/${itemId}`;
+        const url = `https://tmucentral.onrender.com/api/database/deleteAd/${itemId}`;
 
         // Confirmation for deleteing the Ad
         if (!window.confirm("Are you sure you want to delete this ad?")) return;

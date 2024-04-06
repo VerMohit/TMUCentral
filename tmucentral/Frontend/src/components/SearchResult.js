@@ -23,7 +23,7 @@ const SearchResult = ({ onFormSubmit }) => {
   useEffect(() => {
     const fetchData = async () => {
       const PORT = process.env.PORT || 3005;
-      const url = `http://localhost:${PORT}/api/database/searchAds`;
+      const url = `https://tmucentral.onrender.com/api/database/searchAds`;
 
       try {
         const response = await fetch(url, {

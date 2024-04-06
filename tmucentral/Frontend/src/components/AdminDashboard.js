@@ -11,7 +11,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     // Fetching the ads from the database
     const PORT = process.env.PORT || 3005;
-    const url = `http://localhost:${PORT}/api/database/getAds`;
+    const url = `https://tmucentral.onrender.com/api/database/getAds`;
     fetch(url)
       .then((resp) => {
         if (!resp.ok) {
@@ -26,7 +26,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     // Fetching the users from the database
     const PORT = process.env.PORT || 3005;
-    const url = `http://localhost:${PORT}/api/database/getUsers`;
+    const url = `https://tmucentral.onrender.com/api/database/getUsers`;
 
     if (activeMenu === "manage-users") {
       fetch(url)
@@ -48,7 +48,7 @@ export default function AdminDashboard() {
   async function handleDelete(type, itemId) {
     // Find the specific ad in the database
     const PORT = process.env.PORT || 3005;
-    const url = `http://localhost:${PORT}/api/database/${type}/${itemId}`;
+    const url = `https://tmucentral.onrender.com/api/database/${type}/${itemId}`;
     try {
       const response = await fetch(url, {
         method: "DELETE",

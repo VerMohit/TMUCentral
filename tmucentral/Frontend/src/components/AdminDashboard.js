@@ -10,7 +10,7 @@ export default function AdminDashboard() {
   const navigate = useNavigate();
   useEffect(() => {
     const PORT = process.env.PORT || 3005;
-    const url = `http://localhost:${PORT}/api/database/getAds`;
+    const url = `https://tmucentral.onrender.com/api/database/getAds`;
     fetch(url)
       .then((resp) => {
         if (!resp.ok) {
@@ -24,7 +24,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     const PORT = process.env.PORT || 3005;
-    const url = `http://localhost:${PORT}/api/database/getUsers`;
+    const url = `https://tmucentral.onrender.com/api/database/getUsers`;
 
     if (activeMenu === "manage-users") {
       fetch(url)
@@ -45,7 +45,7 @@ export default function AdminDashboard() {
 
   async function handleDelete(type, itemId) {
     const PORT = process.env.PORT || 3005;
-    const url = `http://localhost:${PORT}/api/database/${type}/${itemId}`;
+    const url = `https://tmucentral.onrender.com/api/database/${type}/${itemId}`;
     try {
       const response = await fetch(url, {
         method: "DELETE",

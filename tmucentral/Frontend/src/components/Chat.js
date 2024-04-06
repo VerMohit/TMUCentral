@@ -6,7 +6,7 @@ import { useAuth } from "../contexts/AuthContext"
 
 function Chat() {
   const PORT = process.env.PORT || 3005;
-  const url = `http://localhost:${PORT}/api/database/getUserEmail`;
+  const url = `https://tmucentral.onrender.com//api/database/getUserEmail`;
 
   const { currentUser } = useAuth();
   const email = currentUser.email;

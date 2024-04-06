@@ -21,7 +21,7 @@ const AdPage = () => {
   // Fetching ad data from the server
   useEffect(() => {
     const PORT = process.env.PORT || 3005;
-    const url = `http://localhost:${PORT}/api/database/getAdById/${adId}`;
+    const url = `https://tmucentral.onrender.com/api/database/getAdById/${adId}`;
     fetch(url)
       .then((response) => response.json())
       .then((data) => setAd(data))

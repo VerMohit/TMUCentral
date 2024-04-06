@@ -20,7 +20,7 @@ import Chat from './Chat';
 
 async function handleFormSubmit(path, data, msg, inputMethod = "POST") {
   const PORT = process.env.PORT || 3005;
-  const url = `https://tmucentral.onrender.com//api/database/${path}`;
+  const url = `https://tmucentral.onrender.com/api/database/${path}`;
   try {
     const response = await fetch(url, {
       method: inputMethod,
